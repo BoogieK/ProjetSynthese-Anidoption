@@ -1,4 +1,203 @@
-html
+@font-face
 {
-    background-color: red;
+    font-family: fontAnidoption;
+    src: url("../font/carrinady/Carrinady.ttf");
 }
+
+
+html, body
+{
+    margin: 0%;
+    padding: 0%;
+    height: 100%;
+}
+
+header
+{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+
+    background-color: #69306d;
+    border: 5px solid black;
+}
+
+.logo 
+{
+    grid-column: 1;
+    grid-row: 1;
+
+    color:white;
+}
+
+.espacement
+{
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.creationCompte
+{
+    grid-column: 3;
+    grid-row: 1;
+}
+
+.logo img
+{
+    width: 100px;
+    height: 100px; 
+    
+    float: left;
+
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-bottom: 1%;
+}
+
+.logo h1
+{
+    display: table;
+
+    margin-left:27%;
+    padding: 0%;
+
+    font-family: fontAnidoption;
+    font-size: 400%;
+}
+
+.creationCompte button
+{
+    float: right;
+    margin-right: 10%;
+    margin-top: 6%;
+
+    font-family: fontAnidoption;
+    font-size: 190%;
+    color: #0e103d;
+    padding: 5%;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+  
+    background-color: #f2d7ee;
+   
+}
+
+main
+{
+    background-color: #d3bcc0;
+
+    font-family: fontAnidoption;
+    font-size: 200%;
+    color: #0e103d;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+}
+
+.espaceGauche
+{
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.contenu
+{
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.espaceDroit
+{
+    grid-column: 3;
+    grid-row: 1;
+}
+
+h2
+{
+    margin: 0%;
+    padding-top: 30%;
+    padding-bottom: 25%;
+    text-align: center;
+    font-size: 250%;
+}
+
+form
+{
+    margin-left: 2%;
+}
+
+#motDePasse
+{
+    margin-left: 9%;
+} 
+
+form button
+{
+    margin-top: 25%;
+    margin-left: 30.6%;
+    margin-bottom: 30%;
+    
+    color: white;
+    font-family: fontAnidoption;
+    font-size: 150%;
+    background-color: #69306d;
+
+    padding: 2%;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+footer
+{
+    background-color: #69306d;
+    border: 5px solid black;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+}
+
+.copyright
+{
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.copyright img 
+{
+    width: 25px;
+    height: 25px;
+
+    float: left;
+    margin-top: 3%;
+    margin-left: 1%;
+}
+
+.copyright p
+{
+    display: table;
+    margin-top: 3%;
+    margin-left: 5%;
+    padding: 0%;
+
+    font-family: fontAnidoption;
+    font-size: 150%;
+    color: white;
+}
+
+#iconFooter
+{
+    grid-column: 2;
+    grid-row: 1;
+
+    width: 50px;
+    height: 50px;
+    
+    padding-top: 2%;
+    padding-left: 92%;
+}
+
+

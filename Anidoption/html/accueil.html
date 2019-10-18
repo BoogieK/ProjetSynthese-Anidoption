@@ -4,32 +4,48 @@
         <title>Anidoption</title>
         <link rel="stylesheet" href="../css/accueil.css">
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     </head>
     <body>
         <header>
-            <div class="entete">
-                <img src="../images/logo.png" alt="logo">
+            <div class="logo">
+                <img src="../images/logo.png" alt="logo" >
+                <h1>Anidoption</h1>
+            </div>
+            <div class="espacement"></div>
+            <div class="creationCompte">
+                    <button type="submit">Créer un compte</button>
             </div>
         </header>
+
         <main>
+            <div class="espaceGauche"></div>
+            <div class="contenue">
+            <h2>Bienvenue</h2>
             <form action="accueil.html" method="POST">
                 <div>
-                    <label for="courriel">Adresse courriel</label>
+                    <label for="courriel">Adresse courriel: </label>
+                    <input type="text" name="adresseCourriel" size="50"/>
                 </div>
                 <div>
-                    <input type="text" name="adresseCourriel" id="adresseCourriel"/>
-                </div>
-
-                <div>
-                    <label for="motDePasse">Mot de passe</label>
-                </div>
-                <div>
-                    <input type="text" name="motDePasse" id="motDePasse"/>
+                    <label for="motDePasse">Mot de passe: </label>
+                    <input type="text" name="motDePasse" id="motDePasse" size="50"/>
                 </div>
                 <div>
                     <button type="submit">Connexion</button>
                 </div>
             </form>
+        </div>
+            <div class="espaceDroit"></div>
         </main>
+        <footer>
+            <div class="copyright">
+                    <img src="../images/copyright.png" alt="copyright">
+                    <p>Kim Charbonneau</p>
+            </div>
+            
+            <img src="../images/iconFooter.png" alt="logoFooter" id="iconFooter">
+        </footer>
     </body>
 </html>
