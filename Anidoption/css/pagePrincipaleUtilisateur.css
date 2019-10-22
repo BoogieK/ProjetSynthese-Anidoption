@@ -95,46 +95,53 @@ main
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: auto;
 }
+
 .coteGauche
 {
     display: grid;
     grid-template-columns: repeat(2,1fr);
     grid-template-rows: auto;
+
+    color: #0e103d;
+    
 }
+
 .favoris
 {
     grid-column: 1;
     grid-row: 1;
 
     background-color: white;
+    border: 5px solid black;
+}
+
+.favoris h2
+{
+    border-bottom: 5px solid black; 
+    
 }
 
 .parametres
 {
-    display: grid;
-    grid-template-columns: 1fr, 1fr;
-    grid-template-rows: auto;
+    margin-top: 500%;
+
+    border-top: 5px solid black; 
+
 }
-
-.parametres img
-{
-    width: 25%;
-    height: auto;
-
-    grid-column: 1;
-    grid-row: 1;
-
-    margin-top: 75%;
-    margin-left: 25%;
-}
-
 .parametres h3
 {
-    grid-column: 2;
-    grid-row: 1;
-
-    margin-right: 10%;
+    padding-left: 25%;
 }
+.parametres img
+{
+    width: 20%;
+    height: auto;
+
+    padding-left: 2%;
+    margin-top: 20%;
+    float: left;
+}
+
 
 .contenu
 {
