@@ -1,3 +1,11 @@
+<?php
+
+    require_once("../action/IndexAction.php");
+	$action = new IndexAction();
+    $action->execute();
+    
+?> 
+
 <!DOCTYPE html>
 <html>
 
@@ -16,22 +24,31 @@
             <h1>Anidoption</h1>
         </div>
         <div class="espacement"></div>
-        <div class="creationCompte">
-            <button type="submit">Créer un compte</button>
-        </div>
+        <form action="index.php" method="post" class="creationCompte">
+			<button type="submit" name="creerCompte">Créer un compte</button>
+		</form>
     </header>
     <main>
         <div class="espaceGauche"></div>
         <div class="contenu">
             <h2>Bienvenue</h2>
-            <form action="accueil.php" method="POST">
+            <?php
+                if ($action->wrongLogin)
+                {
+			?>
+            <div id="error-div"><strong>Erreur : </strong>Les informations fournies sont invalides</div>
+            <br>
+			<?php
+			    }
+		    ?>
+            <form action="index.php" method="POST">
                 <div>
                     <label for="courriel">Adresse courriel: </label>
-                    <input type="text" name="adresseCourriel" size="50" />
+                    <input type="text" name="adresseCourriel" id="adresseCourriel" size="50" />
                 </div>
                 <div>
                     <label for="motDePasse">Mot de passe: </label>
-                    <input type="text" name="motDePasse" id="motDePasse" size="50" />
+                    <input type="password" name="motDePasse" id="motDePasse" size="50" />
                 </div>
                 <div>
                     <button type="submit">Connexion</button>
@@ -43,4 +60,4 @@
 
 <?php
     require_once("../partial/footer.php");
-?>
+?> 

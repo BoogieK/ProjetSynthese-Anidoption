@@ -1,3 +1,11 @@
+<?php
+
+    require_once("../action/PagePrincipaleUtilisateurAction.php");
+	$action = new PagePrincipaleUtilisateurAction();
+    $action->execute();
+    
+?> 
+
 <!DOCTYPE html>
 <html>
 
@@ -15,9 +23,20 @@
             <h1>Anidoption</h1>
         </div>
         <div class="espacement"></div>
-        <div class="deconnexion">
-            <button type="submit">Déconnexion</button>
-        </div>
+            <div class="deconnexion">
+                <!-- <button type="submit" name="deconnexion">Déconnexion</button> -->
+                <?php
+						if ($action->isLoggedIn()) {
+							?>
+							<div>
+								[
+								<a href="?logout=true">Déconnexion</a>
+								]
+							</div>
+							<?php
+						}
+					?>
+            </div>
     </header>
     <main>
         <div class="coteGauche">

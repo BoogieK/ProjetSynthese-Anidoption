@@ -1,3 +1,11 @@
+<?php
+
+    require_once("../action/CreationCompteProfilChienAction.php");
+	$action = new CreationCompteProfilChienAction();
+    $action->execute();
+    
+?> 
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -75,12 +83,12 @@
                     <br>
                     <div class="boutonsRadio">
                         <label for="autreAnimauxChats" class="autresAnimaux">Chats</label>
-                        <input type="radio" name="reponseAnimauxAutres" id="reponseAnimauxAutres" value="oui"/>Oui
-                        <input type="radio" name="reponseAnimauxAutres" id="reponseAnimauxAutres" value="non"/>Non
+                        <input type="radio" name="reponseAnimauxAutresChats" id="reponseAnimauxAutres" value="oui"/>Oui
+                        <input type="radio" name="reponseAnimauxAutresChats" id="reponseAnimauxAutres" value="non"/>Non
                         <br>
                         <label for="autreAnimauxChiens" class="autresAnimaux">Chiens</label>
-                        <input type="radio" name="reponseAnimauxAutres" id="reponseAnimauxAutres" value="oui"/>Oui
-                        <input type="radio" name="reponseAnimauxAutres" id="reponseAnimauxAutres" value="non"/>Non
+                        <input type="radio" name="reponseAnimauxAutresChiens" id="reponseAnimauxAutres" value="oui"/>Oui
+                        <input type="radio" name="reponseAnimauxAutresChiens" id="reponseAnimauxAutres" value="non"/>Non
                     </div>
                 </div>
                 <br>
@@ -105,16 +113,16 @@
                 <div class="caracteres">
                     <label for="caractere">Quels entrainements êtes-vous prêt à faire avec votre chien:</label>
                     <br>
-                    <input type="checkbox" name="peureux" value="oui" /> Possession<br/>
-                    <input type="checkbox" name="pasManipulation" value="oui" /> Rester seul à la maison<br/>
-                    <input type="checkbox" name="attention" value="oui" /> Manipulations<br/>
-                    <input type="checkbox" name="calme" value="oui" /> Marche en laisse<br/>
-                    <input type="checkbox" name="aimeCaresses" value="oui" /> Propreté<br/>
-                    <input type="checkbox" name="brossage" value="oui" /> Jappements<br/>
-                    <input type="checkbox" name="aimeCaresses" value="oui" /> Commandes de bases<br/>
-                    <input type="checkbox" name="brossage" value="oui" /> Introduction à la cage<br/>
-                    <input type="checkbox" name="aimeCaresses" value="oui" /> Auto-contrôle<br/>
-                    <input type="checkbox" name="brossage" value="oui" /> Protection de la nourriture<br/>
+                    <input type="checkbox" name='choixEntrainement[]' value="possession" /> Possession<br/>
+                    <input type="checkbox" name='choixEntrainement[]' value="solitude" /> Rester seul à la maison<br/>
+                    <input type="checkbox" name='choixEntrainement[]' value="manipulation" /> Manipulations<br/>
+                    <input type="checkbox" name='choixEntrainement[]' value="marcheLaisse" /> Marche en laisse<br/>
+                    <input type="checkbox" name='choixEntrainement[]' value="proprete" /> Propreté<br/>
+                    <input type="checkbox" name='choixEntrainement[]' value="jappements" /> Jappements<br/>
+                    <input type="checkbox" name='choixEntrainement[]' value="commandesBases" /> Commandes de bases<br/>
+                    <input type="checkbox" name='choixEntrainement[]' value="cage" /> Introduction à la cage<br/>
+                    <input type="checkbox" name='choixEntrainement[]' value="selfControl" /> Auto-contrôle<br/>
+                    <input type="checkbox" name='choixEntrainement[]' value="foodProtect" /> Protection de la nourriture<br/>
                 </div>
                 <br>
                 <div>
@@ -125,15 +133,13 @@
                     </select>
                 </div>
                 <br>
-            </form>
+            
 
-        </div>
-            <div class="espaceDroit">
-                    
-                          
-                            <button type="submit">Enregistrer</button>
-                        
             </div>
+            <div class="espaceDroit">
+            <button type="submit" name="enregistrer">Enregistrer</button>         
+            </div>
+        </form>
         </main>
         <?php
         require_once("../partial/footer.php");

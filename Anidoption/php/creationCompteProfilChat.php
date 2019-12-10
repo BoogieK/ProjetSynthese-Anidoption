@@ -1,3 +1,11 @@
+<?php
+    
+    require_once("../action/CreationCompteProfilChatAction.php");
+	$action = new CreationCompteProfilChatAction();
+    $action->execute();
+    
+?> 
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -62,23 +70,20 @@
                 <div class="caracteres">
                     <label for="caractere">Êtes-vous intéressé a adopter un chat:</label>
                     <br>
-                    <input type="checkbox" name="peureux" value="oui" /> Peureux<br/>
-                    <input type="checkbox" name="pasManipulation" value="oui" /> N'aime pas les manipulations<br/>
-                    <input type="checkbox" name="attention" value="oui" /> Besoin d'attention<br/>
-                    <input type="checkbox" name="calme" value="oui" /> Calme<br/>
-                    <input type="checkbox" name="aimeCaresses" value="oui" /> Aime les caresses<br/>
-                    <input type="checkbox" name="brossage" value="oui" /> Aime être brossé<br/>
+                    <input type="checkbox" name='caracteres[]' value="peureux" /> Peureux<br/>
+                    <input type="checkbox" name='caracteres[]' value="manipulation" /> N'aime pas les manipulations<br/>
+                    <input type="checkbox" name='caracteres[]' value="besoinAttention" /> Besoin d'attention<br/>
+                    <input type="checkbox" name='caracteres[]' value="calme" /> Calme<br/>
+                    <input type="checkbox" name='caracteres[]' value="aimeCaresse" /> Aime les caresses<br/>
+                    <input type="checkbox" name='caracteres[]' value="aimeBrossage" /> Aime être brossé<br/>
                 </div>
                 <br>
-            </form>
-
-        </div>
+                </div>
             <div class="espaceDroit">
-                    
-                          
-                            <button type="submit">Enregistrer</button>
+            <button type="submit" name="enregistrer">Enregistrer</button>
                         
-            </div>
+        </div>
+            </form>
         </main>
         <?php
         require_once("../partial/footer.php");
