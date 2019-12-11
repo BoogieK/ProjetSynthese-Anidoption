@@ -23,20 +23,11 @@
             <h1>Anidoption</h1>
         </div>
         <div class="espacement"></div>
-            <div class="deconnexion">
-                <!-- <button type="submit" name="deconnexion">Déconnexion</button> -->
-                <?php
-						if ($action->isLoggedIn()) {
-							?>
-							<div>
-								[
-								<a href="?logout=true">Déconnexion</a>
-								]
-							</div>
-							<?php
-						}
-					?>
-            </div>
+            <!-- <div class="deconnexion"> -->
+            <form action="pagePrincipaleUtilisateur.php" method="POST" class="deconnexion">
+                <button type="submit" name="deconnexion">Déconnexion</button>
+                
+            <!-- </div> -->
     </header>
     <main>
         <div class="coteGauche">
@@ -62,17 +53,17 @@
                     <div class="boutonsChoix">
                         <div class="like">
                             <!-- <button  src="../images/heartButton.png" type="submit"></button> -->
-                            <input type="image" id="like" src="../images/heartButton.png">
+                            <input type="image" id="like" name= "like" src="../images/heartButton.png">
                         </div>
                         <div class="nope">
-                            <input type="image" id="nope" src="../images/refusButton.png">
+                            <input type="image" id="nope" name="nope" src="../images/refusButton.png">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-
+    </form>  
 <?php
     require_once("../partial/footer.php");
 ?>

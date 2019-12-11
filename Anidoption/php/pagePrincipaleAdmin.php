@@ -1,3 +1,9 @@
+<?php
+    require_once("../action/PagePrincipaleAdminAction.php");
+	$action = new PagePrincipaleAdminAction();
+    $action->execute();
+?> 
+
 <!DOCTYPE html>
 <html>
 
@@ -9,6 +15,7 @@
 </head>
 
 <body>
+<form action="pagePrincipaleAdmin.php" method="POST">
     <header>
         <div class="logo">
             <img src="../images/logo.png" alt="logo">
@@ -16,7 +23,8 @@
         </div>
         <div class="espacement"></div>
         <div class="deconnexion">
-            <button type="submit">Déconnexion</button>
+          
+            <button type="submit" name="deconnexion">Déconnexion</button>
         </div>
     </header>
     <main>
@@ -36,7 +44,7 @@
         </div>
 
         <div class="contenu">
-            <form action="pagePrincipaleAdmin.php" method="POST">
+            
                 <h1>Creation de profil</h1>
                 <div>
                     <p>Quelle espèce voulez-vous mettre en adoption?</p> 
@@ -45,13 +53,13 @@
                     
                     <p>Chat<input type="radio" name="animalFavori" id="favoriChat" value="chat"/></p>
                 </div>
-            </form>
+          
         </div>
         <div class="espaceDroit">
-            <button type="submit">Suivant</button>
+            <button type="submit" name="suivant">Suivant</button>
         </div>
     </main>
-
+    </form>
 <?php
     require_once("../partial/footer.php");
 ?>
