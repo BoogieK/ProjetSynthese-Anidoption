@@ -13,6 +13,8 @@
 
         protected function executeAction()
         {
+			$this->rechercheMatchsPossibles();
+
 			if (isset($_POST["deconnexion"]))
 			{
 				session_unset();
@@ -28,8 +30,24 @@
 			// }
 			
 		}
-	}
 
-           
-		
-	
+		public static function rechercheMatchsPossibles()
+		{
+			$espece = ComplementsDAO::rechercheEspece();
+			
+			if($espece == 1)	//Chat
+			{
+
+			}
+			else if($espece == 2)	//Chien
+			{
+				$sexe = ComplementsDAO::rechercheSexeDesire();
+				$conteneurId = ComplementsDAO::trouverToutCeuxAuSexeCorrespondant($sexe);
+				
+				foreach ($conteneurId as $idAnimaux)
+				{
+					echo $idAnimaux;
+				}
+			}
+		}
+	}

@@ -59,6 +59,53 @@
 			$requete->bindValue(':id_user', $id_user);
 			$requete->bindValue(':id_compteChatCaractere', $id);
 			$requete->execute();
-        }
+		}
+		
+		public static function rechercheEspece()
+		{
+			$connexion = Connexion::getConnexion();
+			$id_user = $_SESSION["id"];
+			
+            $sql = $connexion->prepare("SELECT espece from utilisateur where id=?");
+			$sql->bindValue(1, $id_user);
+			$sql->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
+			$sql->execute();
+
+			if ($row = $sql->fetch())	//Si row n'est pas null (qu'il y a des lignes)
+			{
+				$espece = $row["espece"];
+            }
+			return $espece;
+		}
+
+		public static function rechercheSexeDesire()
+		{
+			$connexion = Connexion::getConnexion();
+			$id_user = $_SESSION["id"];
+			
+            $sql = $connexion->prepare("SELECT sexe from compteChien where id_user=?");
+			$sql->bindValue(1, $id_user);
+			$sql->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
+			$sql->execute();
+
+			if ($row = $sql->fetch())	//Si row n'est pas null (qu'il y a des lignes)
+			{
+				$sexe = $row["sexe"];
+            }
+			return $sexe;
+		}
+
+		public static function trouverToutCeuxAuSexeCorrespondant($sexe)
+		{
+			$connexion = Connexion::getConnexion();
+			
+			$sql = $connexion->prepare("SELECT id from animaux where sexe=?");
+			$sql->bindValue(1, $sexe);
+			$sql->execute();
+
+			$row = $sql->fetchAll();	//Si row n'est pas null (qu'il y a des lignes)
+			
+			return $row;
+		}
     }
 	
