@@ -20,33 +20,42 @@
 								isset($_POST["choixGriffes"]) &&
                             		isset($_POST["choixToilettage"]) &&
                                 		isset($_POST["reponse2Chats"]) && 
-											isset($_POST['caracteres']))
+											isset($_POST['caracteres']) &&
+												isset($_FILES['imageAnimal']))
 				{
 					try
 					{
+
 						$nom = $_POST["nom"];
 						$age = $_POST["age"];
 						$sexe = $this->convertirSexe($_POST["choixSexe"]);
-
+						
+						$image = $this->verifierIMG($_FILES['imageAnimal']);
 						$griffes = $this->convertirGriffes($_POST["choixGriffes"]);
                         $toilettage = $this->convertirToilettage($_POST["choixToilettage"]);
                         $frereSoeur = $this->convertirFamille($_POST["reponse2Chats"]);
 						
-						if (is_numeric($age))
+						if (!empty($image))
 						{
-							$id=AnimauxDAO::creationFicheAnimal($nom,$age,$sexe);
-							echo $id;
-							AnimauxDAO::creationFicheChat($id,$griffes,$toilettage,$frereSoeur);
-
-							foreach($_POST['caracteres'] as $nomCaractere)
+							if (is_numeric($age))
 							{
-								$idCaractere = ComplementsDAO::trouverIDCaractereChat($nomCaractere);
-								AnimauxDAO::insererCaractereChatAdoption($id, $idCaractere);
+								$id=AnimauxDAO::creationFicheAnimal($nom,$age,$sexe,$image);
+								AnimauxDAO::creationFicheChat($id,$griffes,$toilettage,$frereSoeur);
+
+								foreach($_POST['caracteres'] as $nomCaractere)
+								{
+									$idCaractere = ComplementsDAO::trouverIDCaractereChat($nomCaractere);
+									AnimauxDAO::insererCaractereChatAdoption($id, $idCaractere);
+								}
+							}
+							else
+							{
+								echo "Veuillez entrer un age sous forme numerique.";
 							}
 						}
 						else
 						{
-							echo "Veuillez entrer un age sous forme numerique.";
+							echo "Veuillez entrer une image valide.";
 						}
 						
 						header("location:pagePrincipaleAdmin.php");
@@ -123,6 +132,39 @@
 				$famille = 0;
 			}
 			return $famille;
+		}
+
+		public function verifierIMG($image)
+		{
+			//Le code qui suit ne m'appartient pas au complet. Ne sachant pas comment upload un lien pour une image, j'ai ete sur ce site:
+			//https://www.tutorialspoint.com/php/php_file_uploading.htm
+
+			$errors= array();
+			$file_name = $_FILES['imageAnimal']['name'];
+			$file_size =$_FILES['imageAnimal']['size'];
+			$file_tmp =$_FILES['imageAnimal']['tmp_name'];
+			$file_type=$_FILES['imageAnimal']['type'];
+			$file_ext=strtolower(end(explode('.',$_FILES['imageAnimal']['name'])));
+
+			$extensions= array("jpeg","jpg","png");
+
+			if(in_array($file_ext,$extensions)=== false)
+			{
+				$errors[]="extension not allowed, please choose a JPEG or PNG file.";
+			}
+			if($file_size > 2097152)
+			{
+				$errors[]='File size must be excately 2 MB';
+			}
+			if(empty($errors)==true)
+			{
+				move_uploaded_file($file_tmp,"upload/".$file_name);
+				return $file_name;
+			}
+			else
+			{
+				print_r($errors);
+			}
 		}
 	}
 

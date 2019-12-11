@@ -3,17 +3,18 @@
 
 	class AnimauxDAO
 	{
-		public static function creationFicheAnimal($nom,$age,$sexe)
+		public static function creationFicheAnimal($nom,$age,$sexe,$image)
 		{
             $id=null;
             $connexion = Connexion::getConnexion();
             
             try
             {
-                $sql=$connexion->prepare("INSERT INTO animaux (nom,age,sexe) VALUES (:nom, :age, :sexe)");
+                $sql=$connexion->prepare("INSERT INTO animaux (nom,age,sexe,img) VALUES (:nom, :age, :sexe, :img)");
 				$sql->bindValue(':nom', $nom);
 				$sql->bindValue(':age', $age);
-				$sql->bindValue(':sexe', $sexe);
+                $sql->bindValue(':sexe', $sexe);
+                $sql->bindValue(':img', $image);
                 $sql->execute();
                 
                 $sqlTrouverId = $connexion->prepare("SELECT id from animaux where nom=? AND age=? AND sexe =?");

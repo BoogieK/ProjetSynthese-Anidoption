@@ -10,7 +10,7 @@
 <html>
     <head>
         <title>Anidoption</title>
-        <link rel="stylesheet" href="../css/creationCompteProfilChat.css">
+        <link rel="stylesheet" href="../css/creationFicheChat.css">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -35,23 +35,25 @@
             <div class="contenu">
             <h2>- Compte -</h2>
             <h3>.: Chats :. </h3>
-            <form action="creationFicheChat.php" method="POST">
-            <div>
+            <form action="creationFicheChat.php" method="POST" enctype="multipart/form-data">
+            <div class="centrerImage">
+            <div class=texteBase>
+                <div>
                 <label for="nom">Nom:</label>
                 <input type="text" name="nom">
-            </div>
-            <div>
+                </div>
+                <div>
                 <label for="age">Age:</label>
                 <input type="text" name="age">
-            </div>
-                <div>
+                </div>
+                    <div>
                     <label for="sexe">Sexe: </label>
                     <select name="choixSexe">
                         <option value="male">Male</option>
                         <option value="femelle">Femelle</option>
                     </select>
-                </div>    
-                <div>
+                    </div>    
+                    <div>
                     <label for="griffes">Griffes: </label>
                     <select name="choixGriffes">
                         <option value="pattesAvants">Dégriffé aux pattes avants</option>
@@ -59,15 +61,23 @@
                         <option value="pattes">Dégriffé aux 4 pattes</option>
                         <option value="sansPreference">Sans importance</option>
                     </select>
-                </div>  
-                <div>
+                    </div>  
+                    <div>
                     <label for="besoinsToilettage">Toilettage: </label>
                     <select name="choixToilettage">
                         <option value="faible">Faible</option>
                         <option value="moyen">Moyen</option>
                         <option value="eleve">Élevé</option>
                     </select>
+                    </div>
+                </div>
+                <div class="image">
+                <div>
+                    Image:
+                    <input type="file" name="imageAnimal" />
                 </div>  
+                </div>
+                <div class="basPageContenu">
                 <div class="adoptionMultiple">
                     <label for="frereSoeur">Frère ou soeur:</label>
                     <br>
@@ -87,6 +97,8 @@
                     <input type="checkbox" name='caracteres[]' value="aimeBrossage" /> Aime être brossé<br/>
                 </div>
                 <br>
+                </div>
+                </div>
                 </div>
             <div class="espaceDroit">
             <button type="submit" name="enregistrer">Enregistrer</button>

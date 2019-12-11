@@ -25,14 +25,16 @@
                                                     isset($_POST["choixHeure"]) &&
 												        isset($_POST["reponseDispo"]) &&
 													        isset($_POST['choixEntrainement']) &&
-                                                    	        isset($_POST["choixDomicile"]))
+																isset($_POST["choixDomicile"]) &&
+																	isset($_FILES['imageAnimal']))
 				{
 					try
 					{
                         $nom = $_POST["nom"];
 						$age = $_POST["age"];
                         $sexe = $this->convertirSexe($_POST["choixSexe"]);
-                        
+						
+						$image = $this->verifierIMG($_FILES['imageAnimal']);
 						$taille = $this->convertirTaille($_POST["choixTaille"]);
 						$enfant = $this->convertirEnfant($_POST["reponseEnfant"]);
 						$ado = $this->convertirAdo($_POST["reponseAdo"]);
@@ -43,21 +45,28 @@
 						$travailMaison = $this->convertirHeureMaison($_POST["reponseDispo"]);
 						$habitation = $this->convertirDomicile($_POST["choixDomicile"]);
 						
-						if (is_numeric($age))
+						if (!empty($image))
 						{
-							$id=AnimauxDAO::creationFicheAnimal($nom,$age,$sexe);
-                            AnimauxDAO::creationFicheChien($id,$taille,$enfant,$ado,$autresAnimauxChat,$autresAnimauxChien,
+							if (is_numeric($age))
+							{
+								$id=AnimauxDAO::creationFicheAnimal($nom,$age,$sexe,$image);
+                            	AnimauxDAO::creationFicheChien($id,$taille,$enfant,$ado,$autresAnimauxChat,$autresAnimauxChien,
                                                             $balade,$travailMaison,$habitation);
 
-							foreach($_POST['choixEntrainement'] as $nomEntrainement)
+								foreach($_POST['choixEntrainement'] as $nomEntrainement)
+								{
+									$idEntrainement = ComplementsDAO::trouverIDEntrainementChien($nomEntrainement);
+									AnimauxDAO::insererEntrainementChienAdoption($id, $idEntrainement);
+								}
+							}
+							else
 							{
-								$idEntrainement = ComplementsDAO::trouverIDEntrainementChien($nomEntrainement);
-								AnimauxDAO::insererEntrainementChienAdoption($id, $idEntrainement);
+								echo "Veuillez entrer un age sous forme numerique.";
 							}
 						}
 						else
 						{
-							echo "Veuillez entrer un age sous forme numerique.";
+							echo "Veuillez entrer une image valide.";
 						}
 						
 						header("location:pagePrincipaleAdmin.php");
@@ -204,5 +213,38 @@
 				$toit = 2;
 			}
 			return $toit;
+		}
+
+		public function verifierIMG($image)
+		{
+			//Le code qui suit ne m'appartient pas au complet. Ne sachant pas comment upload un lien pour une image, j'ai ete sur ce site:
+			//https://www.tutorialspoint.com/php/php_file_uploading.htm
+
+			$errors= array();
+			$file_name = $_FILES['imageAnimal']['name'];
+			$file_size =$_FILES['imageAnimal']['size'];
+			$file_tmp =$_FILES['imageAnimal']['tmp_name'];
+			$file_type=$_FILES['imageAnimal']['type'];
+			$file_ext=strtolower(end(explode('.',$_FILES['imageAnimal']['name'])));
+
+			$extensions= array("jpeg","jpg","png");
+
+			if(in_array($file_ext,$extensions)=== false)
+			{
+				$errors[]="extension not allowed, please choose a JPEG or PNG file.";
+			}
+			if($file_size > 2097152)
+			{
+				$errors[]='File size must be excately 2 MB';
+			}
+			if(empty($errors)==true)
+			{
+				move_uploaded_file($file_tmp,"upload/".$file_name);
+				return $file_name;
+			}
+			else
+			{
+				print_r($errors);
+			}
 		}
 	}
