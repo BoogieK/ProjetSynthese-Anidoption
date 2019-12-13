@@ -3,24 +3,26 @@
 
 	class AnimauxDAO
 	{
-		public static function creationFicheAnimal($nom,$age,$sexe,$image)
+		public static function creationFicheAnimal($nom,$age,$sexe,$image, $espece)
 		{
             $id=null;
             $connexion = Connexion::getConnexion();
             
             try
             {
-                $sql=$connexion->prepare("INSERT INTO animaux (nom,age,sexe,img) VALUES (:nom, :age, :sexe, :img)");
-				$sql->bindValue(':nom', $nom);
+                $sql=$connexion->prepare("INSERT INTO animaux (espece,nom,age,sexe,img) VALUES (:espece, :nom, :age, :sexe, :img)");
+                $sql->bindValue(':espece', $espece);
+                $sql->bindValue(':nom', $nom);
 				$sql->bindValue(':age', $age);
                 $sql->bindValue(':sexe', $sexe);
                 $sql->bindValue(':img', $image);
                 $sql->execute();
                 
-                $sqlTrouverId = $connexion->prepare("SELECT id from animaux where nom=? AND age=? AND sexe =?");
-                $sqlTrouverId->bindValue(1, $nom);
-                $sqlTrouverId->bindValue(2, $age);
-                $sqlTrouverId->bindValue(3, $sexe);
+                $sqlTrouverId = $connexion->prepare("SELECT id from animaux where espece =? AND nom=? AND age=? AND sexe =?");
+                $sqlTrouverId->bindValue(1, $espece);
+                $sqlTrouverId->bindValue(2, $nom);
+                $sqlTrouverId->bindValue(3, $age);
+                $sqlTrouverId->bindValue(4, $sexe);
                 $sqlTrouverId->setFetchMode(PDO::FETCH_ASSOC);
                 $sqlTrouverId->execute();
                         

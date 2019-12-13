@@ -33,6 +33,15 @@
 						$enfant = $this->convertirEnfant($_POST["reponseEnfant"]);
 						$ado = $this->convertirAdo($_POST["reponseAdo"]);
 						$futursParents = $this->convertirParents($_POST["reponseFutursParents"]);
+						
+						//Puisque le futursParents n'est pas evalue lors de la recherche de match,
+						//je concidere que si tu prevois avoir des enfants dans un futur proche, c'est comme si t'avais
+						//deja un enfant. 
+						if ($futursParents==1)
+						{
+							$enfant=1;
+						}
+						
 						$autresAnimauxChat= $this->convertirAnimauxChats($_POST["reponseAnimauxAutresChats"]);
 						$autresAnimauxChien = $this->convertirAnimauxChiens($_POST["reponseAnimauxAutresChiens"]);
 						$balade = $this->convertirBalade($_POST["choixHeure"]);

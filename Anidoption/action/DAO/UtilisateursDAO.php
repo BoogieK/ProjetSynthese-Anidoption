@@ -24,6 +24,7 @@
 					if (password_verify($motDePasse, $row["motDePasse"]))
 					{
 						$utilisateur = [];
+						$utilisateur["id"]=$row["id"];
 						$utilisateur["adresseCourriel"] = $row["adresseCourriel"];
 						$utilisateur["visibility"] = $row["visibility"];
 					}

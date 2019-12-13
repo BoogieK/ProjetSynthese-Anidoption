@@ -29,6 +29,7 @@
 						$nom = $_POST["nom"];
 						$age = $_POST["age"];
 						$sexe = $this->convertirSexe($_POST["choixSexe"]);
+						$espece = 1;
 						
 						$image = $this->verifierIMG($_FILES['imageAnimal']);
 						$griffes = $this->convertirGriffes($_POST["choixGriffes"]);
@@ -39,7 +40,7 @@
 						{
 							if (is_numeric($age))
 							{
-								$id=AnimauxDAO::creationFicheAnimal($nom,$age,$sexe,$image);
+								$id=AnimauxDAO::creationFicheAnimal($nom,$age,$sexe,$image,$espece);
 								AnimauxDAO::creationFicheChat($id,$griffes,$toilettage,$frereSoeur);
 
 								foreach($_POST['caracteres'] as $nomCaractere)

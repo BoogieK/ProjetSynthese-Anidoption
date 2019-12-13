@@ -24,7 +24,7 @@
         </div>
         <div class="espacement"></div>
             <!-- <div class="deconnexion"> -->
-            <form action="pagePrincipaleUtilisateur.php" method="POST" class="deconnexion">
+            <form action="pagePrincipaleUtilisateur.php" method="POST" class="deconnexion" enctype="multipart/form-data">
                 <button type="submit" name="deconnexion">Déconnexion</button>
                 
             <!-- </div> -->
@@ -34,7 +34,17 @@
             <div class="favoris">
                 <h2>Favoris</h2>
                 <div class="animauxFavoris">
-
+                    <?php
+                        foreach($action->conteneurFavoris as $nom)
+                        {
+                    ?>
+                    <div>
+                    <?= $nom?>
+                    </div> 
+                    <?php
+                        }
+                    ?>
+                    
                 </div>
                 <div class="parametres">
                     <img src="../images/settingsButton.png" alt="">
@@ -45,18 +55,23 @@
         <div class="contenu">
             <div class="ficheAnimal">
                 <div class="affichage">
-                    <img src="../images/boogie.jpeg" alt="boogie">
+                    <img src="../upload/<?= $action->cheminImage[$action->compteur]?>">
                     <div class="info">
-                        <p class="nom">Boogie</p>
-                        <p class="age">13 ans</p>
+                        <p class="nom"><?= $action->nom[$action->compteur]?></p>
+                        <p class="age"><?= $action->age[$action->compteur]?> ans</p>
                     </div>
                     <div class="boutonsChoix">
                         <div class="like">
-                            <!-- <button  src="../images/heartButton.png" type="submit"></button> -->
-                            <input type="image" id="like" name= "like" src="../images/heartButton.png">
+                            <button name="like" type="submit">
+                                <img id="like" src="../images/heartButton.png" />
+                                <input type="hidden" name="idAnimalPhp" value=<?= $action->listeMatchPossibles[$action->compteur]?> >
+                            </button>
                         </div>
                         <div class="nope">
-                            <input type="image" id="nope" name="nope" src="../images/refusButton.png">
+                            <button name="nope" type="submit">
+                                <img id="nope" src="../images/refusButton.png" />
+                                <input type="hidden" name="idAnimalPhp" value=<?= $action->listeMatchPossibles[$action->compteur]?> >
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -20,6 +20,8 @@
 				{
 					$_SESSION["adresseCourriel"] = $utilisateur["adresseCourriel"];
 					$_SESSION["visibility"] = $utilisateur["visibility"];
+					$_SESSION["id"] = $utilisateur["id"];
+					
 					if ($_SESSION["visibility"] == 1) {
 						header("location:pagePrincipaleUtilisateur.php");
 					}

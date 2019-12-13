@@ -79,6 +79,7 @@ CREATE TABLE compteChien_entrainement(
 
 CREATE TABLE animaux( 
     id INT NOT NULL AUTO_INCREMENT,
+    espece INT,
     nom VARCHAR(32) NOT NULL,
     age INT NOT NULL,
     sexe INT NOT NULL,

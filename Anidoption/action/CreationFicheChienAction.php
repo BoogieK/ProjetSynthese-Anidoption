@@ -32,6 +32,7 @@
 					{
                         $nom = $_POST["nom"];
 						$age = $_POST["age"];
+						$espece = 2;
                         $sexe = $this->convertirSexe($_POST["choixSexe"]);
 						
 						$image = $this->verifierIMG($_FILES['imageAnimal']);
@@ -49,7 +50,7 @@
 						{
 							if (is_numeric($age))
 							{
-								$id=AnimauxDAO::creationFicheAnimal($nom,$age,$sexe,$image);
+								$id=AnimauxDAO::creationFicheAnimal($nom,$age,$sexe,$image,$espece);
                             	AnimauxDAO::creationFicheChien($id,$taille,$enfant,$ado,$autresAnimauxChat,$autresAnimauxChien,
                                                             $balade,$travailMaison,$habitation);
 
@@ -148,9 +149,10 @@
 			{
 				$autreChat = 0;
             }
-            elseif ($autresAnimauxChat =="indetermine") {
-                
-                $autreChat = 2;
+			elseif ($autresAnimauxChat =="indetermine")
+			{
+                //Si c'est inconnu, on lui donne le benefice du doute
+                $autreChat = 1;
             }
 			return $autreChat;
 		}
@@ -165,9 +167,10 @@
 			{
 				$autreChien = 0;
             }
-            elseif ($autresAnimauxChien =="indetermine") {
-                
-                $autreChien = 2;
+			elseif ($autresAnimauxChien =="indetermine")
+			{
+                //Si c'est inconnu, on lui donne le benefice du doute
+                $autreChien = 1;
             }
 			return $autreChien;
 		}
@@ -239,7 +242,7 @@
 			}
 			if(empty($errors)==true)
 			{
-				move_uploaded_file($file_tmp,"upload/".$file_name);
+				move_uploaded_file($file_tmp,"../upload/".$file_name);
 				return $file_name;
 			}
 			else

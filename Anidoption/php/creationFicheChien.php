@@ -51,7 +51,8 @@
                         <option value="male">Male</option>
                         <option value="femelle">Femelle</option>
                     </select>
-                </div>    
+                </div>
+                   
                 <div>
                     <label for="taille">Taille: </label>
                     <select name="choixTaille">
