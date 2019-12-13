@@ -23,11 +23,10 @@
             <h1>Anidoption</h1>
         </div>
         <div class="espacement"></div>
-            <!-- <div class="deconnexion"> -->
-            <form action="pagePrincipaleUtilisateur.php" method="POST" class="deconnexion" enctype="multipart/form-data">
-                <button type="submit" name="deconnexion">Déconnexion</button>
+        <form action="pagePrincipaleUtilisateur.php" method="POST" class="deconnexion" enctype="multipart/form-data">
+        <button type="submit" name="deconnexion">Déconnexion</button>
                 
-            <!-- </div> -->
+  
     </header>
     <main>
         <div class="coteGauche">
@@ -55,10 +54,10 @@
         <div class="contenu">
             <div class="ficheAnimal">
                 <div class="affichage">
-                    <img src="../upload/<?= $action->cheminImage[$action->compteur]?>">
+                    <img src="../upload/<?= $action->FichePresentee["img"]?>">
                     <div class="info">
-                        <p class="nom"><?= $action->nom[$action->compteur]?></p>
-                        <p class="age"><?= $action->age[$action->compteur]?> ans</p>
+                        <p class="nom"><?= $action->FichePresentee["nom"]?></p>
+                        <p class="age"><?= $action->FichePresentee["age"]?> ans</p>
                     </div>
                     <div class="boutonsChoix">
                         <div class="like">

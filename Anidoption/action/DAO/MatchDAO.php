@@ -160,7 +160,6 @@
 					$entrainementsNecessaires = $row["nom"];
 				}
 			}
-			// echo "entrainement";
 			return $entrainementsNecessaires;
 		}
 

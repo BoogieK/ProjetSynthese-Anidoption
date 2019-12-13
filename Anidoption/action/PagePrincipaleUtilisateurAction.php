@@ -6,20 +6,10 @@
 	
 	class PagePrincipaleUtilisateurAction extends CommonAction
 	{
-		//Tous les id des animaux pouvant etre matcher avec le user sont la.
+		//Tableau avec tous les id des animaux pouvant etre matcher avec le user.
 		public $listeMatchPossibles=[];
+		public $FichePresentee;
 
-		//public $listeNomEntrainementNecessaires=[];
-		public $cheminImage=[];
-		public $nom=[];
-		public $age=[];
-		public $conteneurFavoris=[];
-		
-		//public $fichesAffichees=[];
-
-		public $compteur=0;
-		
-        
 		public function __construct()
 		{
 			parent::__construct(CommonAction::$VISIBILITY_MEMBER);
@@ -28,11 +18,17 @@
 
         protected function executeAction()
         {
+			//Initialisation d'un compteur de clic pour savoir quel id d'animal on choisi dans le tableau listeMatchPossibles.
+			$compteur=0;
+
+			//En arrivant sur la page, on dit partir la fonction de recherche de matchs
 			$this->rechercheMatchsPossibles();
+			//Afficher une fiche pour commencer
+			$this->afficherFiches($compteur);
+			
 
 			if (isset($_POST["deconnexion"]))
 			{
-				//echo "deconnect";
 				session_unset();
 				session_destroy();
 				session_start();
@@ -42,22 +38,17 @@
 			}
 			elseif (isset($_POST["like"]))
 			{
-				//echo "yass ";
-				$id=$_POST["idAnimalPhp"];
-				//echo $id;
+				//$_SESSION["compteur"]=$compteur++;
+				$compteur++;
+				$this->afficherFiches($compteur);
+				//$id=$_POST["idAnimalPhp"];
 				
-				$this->ajouterAuxFavoris($id);
-				$this->compteur++;
-				//echo $this->conteneurFavoris[0];
+				
 			}
 
 			elseif (isset($_POST["nope"]))
 			{
-				echo "nope ";
-
-				$id=$_POST["idAnimalPhp"];
-				echo $id;
-				// $this->enleverDeLaListePotentielle($this->compteur);
+				//$id=$_POST["idAnimalPhp"];
 				$this->compteur++;
 			}
 		}
@@ -107,9 +98,8 @@
 													$listeNomEntrainementNecessaires = MatchDAO::selectionnerEntrainementFicheChien($idAnimaux);
 													
 													if ($listeNomEntrainementNecessaires == $entrainementDesirees)
-													{
-														//echo $idChien;
-														//Pourquoi est-ce que j'ai besoin de []?
+													{	//J'ai besoin de [] pour pouvoir .append les id dans mon tableau, car 
+														//cette fois-ci, je n'ai pas de fonction qui appel un fetch ou fetchAll MySQL.
 														$this->listeMatchPossibles[]=$idChien;
 													}
 													else
@@ -166,52 +156,14 @@
 						echo $idChien;
 					}
 				}
-				//$fichesAffichees = $this->afficherPossibilites();
-				$this->affichageImage();
-				$this->affichageNom();
-				$this->affichageAge();
 			}
+			
 		}
 
-		public function affichageImage()
+		public function afficherFiches($positionTableau)
 		{
-			foreach ($this->listeMatchPossibles as $id)
-			{
-				$this->cheminImage[]=MatchDAO::retournerLienImage($id);
-				//var_dump($this->cheminImage);
-			}
-		}
-
-		public function affichageNom()
-		{
-			foreach ($this->listeMatchPossibles as $id)
-			{
-				$this->nom[]=MatchDAO::retournerNom($id);
-				//var_dump($this->cheminImage);
-			}
-		}
-
-		public function affichageAge()
-		{
-			foreach ($this->listeMatchPossibles as $id)
-			{
-				$this->age[]=MatchDAO::retournerAge($id);
-				//var_dump($this->cheminImage);
-			}
-		}
-
-		public function afficherPossibilites()
-		{
-			foreach ($this->listeMatchPossibles as $id)
-			{
-				$fichePossible = MatchDAO::retournerFicheChien($id);
-			}
-			return $fichePossible;
-		}
-
-		public function ajouterAuxFavoris($idAnimalChoisi)
-		{
-			//echo $idAnimalChoisi;
-			$this->conteneurFavoris[] = MatchDAO::ajouterUnFavoris($idAnimalChoisi);			
+			$idActuel = $this->listeMatchPossibles[$positionTableau];
+			// echo $idActuel;
+			$this->FichePresentee = MatchDAO::retournerFicheChien($idActuel);
 		}
 	}
