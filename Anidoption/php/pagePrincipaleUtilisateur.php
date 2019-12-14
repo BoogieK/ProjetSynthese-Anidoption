@@ -63,6 +63,7 @@
                         <div class="like">
                             <button name="like" type="submit">
                                 <img id="like" src="../images/heartButton.png" />
+                                <input type="hidden" name="idAnimalPhp" value= <?=$action->FichePresentee["id"]?> >
                                 <input type="hidden" name="compteur" value="<?php echo $_SESSION['compteur']; ?>" />
                             </button>
 

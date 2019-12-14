@@ -42,17 +42,20 @@
 			//Si tu like ou dislike une fiche
 			elseif (isset($_POST["like"]) || isset($_POST["nope"]))
 			{
+				if (isset($_POST["like"]) )
+				{
+					$idAnimalPhp = $_POST["idAnimalPhp"];
+					$this->ajouterFavoris($idAnimalPhp);
+				}
+
 				++$_SESSION['compteur'];
 				$this->afficherFiches($_SESSION['compteur']);
-				//echo sizeof($this->listeMatchPossibles);
+				
 				if ($_SESSION['compteur']>=sizeof($this->listeMatchPossibles))
-				{
-					echo "Y'a pu de choix";
+				{	//Quand il n'y a plus de choix adaptes, on le mentionne au user
 					$this->finFiches();
 				}	
 			}
-			
-			
 		}
 
 

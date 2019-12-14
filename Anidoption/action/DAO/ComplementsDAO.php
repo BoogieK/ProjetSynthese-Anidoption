@@ -64,13 +64,40 @@
 		public static function ajouterFav($idAnimal)
 		{
 			$connexion = Connexion::getConnexion();
-            $id_user = $_SESSION["id"];
+			$id_user = $_SESSION["id"];
 			
-            $requete=$connexion->prepare("INSERT INTO favoris (id_user,id_animaux) 
+			$sql = $connexion->prepare("SELECT id_animaux from favoris where id_user=?");
+			$sql->bindValue(1, $id_user);
+			$sql->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
+			$sql->execute();
+
+			$idFav = $sql->fetchAll();
+
+			if (empty($idFav))
+			{
+				$requete=$connexion->prepare("INSERT INTO favoris (id_user,id_animaux) 
 												VALUES (:id_user, :id_animaux)");
-			$requete->bindValue(':id_user', $id_user);
-			$requete->bindValue(':id_animaux', $idAnimal);
-			$requete->execute();
+				$requete->bindValue(':id_user', $id_user);
+				$requete->bindValue(':id_animaux', $idAnimal);
+				$requete->execute();
+			}
+			else
+			{
+				foreach ($idFav as $id)
+				{
+					if ($id == $idAnimal)
+					{
+						++$_SESSION["existance"];
+					}
+				}
+				if ($_SESSION["existance"] == 0 ) {
+					$requete1=$connexion->prepare("INSERT INTO favoris (id_user,id_animaux) 
+														VALUES (:id_user, :id_animaux)");
+					$requete1->bindValue(':id_user', $id_user);
+					$requete1->bindValue(':id_animaux', $idAnimal);
+					$requete1->execute();
+				}
+			}	
 		}
 
 		public static function retournerIDSFavoris()

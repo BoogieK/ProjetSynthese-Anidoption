@@ -6,7 +6,7 @@
 	{
 		public function __construct()
 		{
-			parent::__construct(CommonAction::$VISIBILITY_PUBLIC);
+			parent::__construct(CommonAction::$VISIBILITY_ADMIN);
 		}
 
         protected function executeAction()
@@ -17,8 +17,8 @@
 				session_destroy();
 				session_start();
 
-				// header("location:index.php");
-				// exit;
+				header("location:index.php");
+				exit;
 			}
 			elseif(isset($_POST["animalFavori"]))
 			{
