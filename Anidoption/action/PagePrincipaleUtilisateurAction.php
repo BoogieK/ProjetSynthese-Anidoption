@@ -3,12 +3,15 @@
 	require_once("DAO/UtilisateursDAO.php");
 	require_once("DAO/AnimauxDAO.php");
 	require_once("DAO/MatchDAO.php");
+	require_once("DAO/ComplementsDAO.php");
 	
 	class PagePrincipaleUtilisateurAction extends CommonAction
 	{
 		//Tableau avec tous les id des animaux pouvant etre matcher avec le user.
 		public $listeMatchPossibles=[];
 		public $FichePresentee;
+		public $listeFavoris=[];
+		
 
 		public function __construct()
 		{
@@ -18,15 +21,14 @@
 
         protected function executeAction()
         {
-			//Initialisation d'un compteur de clic pour savoir quel id d'animal on choisi dans le tableau listeMatchPossibles.
-			$compteur=0;
-
 			//En arrivant sur la page, on dit partir la fonction de recherche de matchs
 			$this->rechercheMatchsPossibles();
-			//Afficher une fiche pour commencer
-			$this->afficherFiches($compteur);
+			//Afficher la premiere fiche pour commencer
+			$this->afficherFiches($_SESSION['compteur']);
+			//Afficher les favoris de l'usager
+			$this->afficherFavoris();
 			
-
+			
 			if (isset($_POST["deconnexion"]))
 			{
 				session_unset();
@@ -36,21 +38,21 @@
 				header("location:index.php");
 				exit;
 			}
-			elseif (isset($_POST["like"]))
+			
+			//Si tu like ou dislike une fiche
+			elseif (isset($_POST["like"]) || isset($_POST["nope"]))
 			{
-				//$_SESSION["compteur"]=$compteur++;
-				$compteur++;
-				$this->afficherFiches($compteur);
-				//$id=$_POST["idAnimalPhp"];
-				
-				
+				++$_SESSION['compteur'];
+				$this->afficherFiches($_SESSION['compteur']);
+				//echo sizeof($this->listeMatchPossibles);
+				if ($_SESSION['compteur']>=sizeof($this->listeMatchPossibles))
+				{
+					echo "Y'a pu de choix";
+					$this->finFiches();
+				}	
 			}
-
-			elseif (isset($_POST["nope"]))
-			{
-				//$id=$_POST["idAnimalPhp"];
-				$this->compteur++;
-			}
+			
+			
 		}
 
 
@@ -157,13 +159,38 @@
 					}
 				}
 			}
-			
+		
 		}
 
 		public function afficherFiches($positionTableau)
 		{
+			//Aller chercher le id de l'animal a la position ou on est rendu dans le tableau
 			$idActuel = $this->listeMatchPossibles[$positionTableau];
-			// echo $idActuel;
-			$this->FichePresentee = MatchDAO::retournerFicheChien($idActuel);
+			$this->FichePresentee = MatchDAO::retournerFicheChien($idActuel);	
+		}
+
+		public function ajouterFavoris($idAnimalAime)
+		{
+			ComplementsDAO::ajouterFav($idAnimalAime);
+		}
+
+		public function afficherFavoris()
+		{
+			$idFav = ComplementsDAO::retournerIDSFavoris();
+		
+			foreach ($idFav as $id)
+			{
+				foreach ($id as $int) {
+					
+					$this->listeFavoris[]=MatchDAO::retournerNomFavoris($int);
+				}
+			}
+		}
+
+		public function finFiches()
+		{
+			$this->FichePresentee["nom"] = "Aucun choix possibles";	
+			$this->FichePresentee["age"] = " - ";
+			$this->FichePresentee["img"] = "sad.gif";
 		}
 	}

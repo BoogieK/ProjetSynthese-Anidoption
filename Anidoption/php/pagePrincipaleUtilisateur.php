@@ -34,11 +34,11 @@
                 <h2>Favoris</h2>
                 <div class="animauxFavoris">
                     <?php
-                        foreach($action->conteneurFavoris as $nom)
+                        foreach($action->listeFavoris as $nom)
                         {
                     ?>
                     <div>
-                    <?= $nom?>
+                    <p><?= $nom ?></p>
                     </div> 
                     <?php
                         }
@@ -54,7 +54,7 @@
         <div class="contenu">
             <div class="ficheAnimal">
                 <div class="affichage">
-                    <img src="../upload/<?= $action->FichePresentee["img"]?>">
+                    <img src="../upload/<?= $action->FichePresentee["img"]?>" width="573" height="573">
                     <div class="info">
                         <p class="nom"><?= $action->FichePresentee["nom"]?></p>
                         <p class="age"><?= $action->FichePresentee["age"]?> ans</p>
@@ -63,13 +63,14 @@
                         <div class="like">
                             <button name="like" type="submit">
                                 <img id="like" src="../images/heartButton.png" />
-                                <input type="hidden" name="idAnimalPhp" value=<?= $action->listeMatchPossibles[$action->compteur]?> >
+                                <input type="hidden" name="compteur" value="<?php echo $_SESSION['compteur']; ?>" />
                             </button>
+
                         </div>
                         <div class="nope">
                             <button name="nope" type="submit">
                                 <img id="nope" src="../images/refusButton.png" />
-                                <input type="hidden" name="idAnimalPhp" value=<?= $action->listeMatchPossibles[$action->compteur]?> >
+                                <input type="hidden" name="compteur" value="<?php echo $_SESSION['compteur']; ?>" />
                             </button>
                         </div>
                     </div>

@@ -22,7 +22,9 @@
 					$_SESSION["visibility"] = $utilisateur["visibility"];
 					$_SESSION["id"] = $utilisateur["id"];
 					
-					if ($_SESSION["visibility"] == 1) {
+					if ($_SESSION["visibility"] == 1)
+					{
+						$_SESSION['compteur']=0;
 						header("location:pagePrincipaleUtilisateur.php");
 					}
 					elseif ($_SESSION["visibility"]==2) {

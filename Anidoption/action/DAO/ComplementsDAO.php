@@ -60,5 +60,36 @@
 			$requete->bindValue(':id_compteChatCaractere', $id);
 			$requete->execute();
 		}
+
+		public static function ajouterFav($idAnimal)
+		{
+			$connexion = Connexion::getConnexion();
+            $id_user = $_SESSION["id"];
+			
+            $requete=$connexion->prepare("INSERT INTO favoris (id_user,id_animaux) 
+												VALUES (:id_user, :id_animaux)");
+			$requete->bindValue(':id_user', $id_user);
+			$requete->bindValue(':id_animaux', $idAnimal);
+			$requete->execute();
+		}
+
+		public static function retournerIDSFavoris()
+		{
+			$connexion = Connexion::getConnexion();
+			$id_user = $_SESSION["id"];
+
+            $sql = $connexion->prepare("SELECT id_animaux from favoris where id_user=?");
+			$sql->bindValue(1, $id_user);
+			$sql->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
+			$sql->execute();
+
+			$idFav = $sql->fetchAll();
+			
+			
+			return $idFav;
+		}
+
     }
 	
+
+			

@@ -254,10 +254,27 @@
 			if ($ficheCorrespondante = $sql->fetch())	//Si compteCorrespondant n'est pas null (qu'il y a des lignes)
 			{
 				$dataFiche = [];
+				$dataFiche["id"] = $ficheCorrespondante["id"];
 				$dataFiche["nom"] = $ficheCorrespondante["nom"];
 				$dataFiche["age"] = $ficheCorrespondante["age"];
 				$dataFiche["img"] = $ficheCorrespondante["img"];
 			}
 			return $dataFiche;
+		}
+		
+		public static function retournerNomFavoris($idAnimal)
+		{
+			$connexion = Connexion::getConnexion();
+			
+			$sql = $connexion->prepare("SELECT nom from animaux where id=?");
+			$sql->bindValue(1, $idAnimal);
+			$sql->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
+			$sql->execute();
+
+			if ($row = $sql->fetch())	//Si compteCorrespondant n'est pas null (qu'il y a des lignes)
+			{
+				$nomAnimal= $row["nom"];
+			}
+			return $nomAnimal;
 		}
     }
