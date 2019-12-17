@@ -138,19 +138,19 @@
 					
 					if ($compteUser["taille"] == $ficheChien["taille"])
 					{
-						if ($compteUser["enfant"]==$ficheChien["enfant"])
+						if ( ($compteUser["enfant"]==$ficheChien["enfant"]) || ($compteUser["enfant"]==0 && $ficheChien["enfant"]==1) )
 						{
-							if ($compteUser["ado"]==$ficheChien["ado"])
+							if ( ($compteUser["ado"]==$ficheChien["ado"]) || ($compteUser["ado"]==0 && $ficheChien["ado"]==1) )
 							{
-								if ($compteUser["chien"]==$ficheChien["chien"])
+								if ( ($compteUser["chien"]==$ficheChien["chien"]) || ($compteUser["chien"]==0 && $ficheChien["chien"]==1) )
 								{
-									if ($compteUser["chat"]==$ficheChien["chat"])
+									if (($compteUser["chat"]==$ficheChien["chat"]) || ($compteUser["chat"]==0 && $ficheChien["chat"]==1) )
 									{
 										if ($compteUser["balade"]==$ficheChien["exerciceRequis"])
 										{
 											if ($compteUser["maison"]==$ficheChien["solitude"])
 											{
-												if ($compteUser["habitat"]==$ficheChien["habitat"])
+												if ( ($compteUser["habitat"]==$ficheChien["habitat"]) || ($compteUser["habitat"]>$ficheChien["habitat"]) )
 												{
 													$listeNomEntrainementNecessaires = MatchDAO::selectionnerEntrainementFicheChien($idAnimaux);
 													
