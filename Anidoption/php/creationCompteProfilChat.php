@@ -34,7 +34,7 @@
             <div class="contenu">
             <h2>- Compte -</h2>
             <h3>.: Chats :. </h3>
-            <form action="creationCompteProfilChat.php" method="POST">
+            <form action="creationCompteProfilChat.php" method="POST" enctype="multipart/form-data">
                 <div>
                     <label for="sexe">Sexe: </label>
                     <select name="choixSexe">

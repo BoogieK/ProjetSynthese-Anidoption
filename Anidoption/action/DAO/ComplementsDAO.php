@@ -80,24 +80,28 @@
 				$requete->bindValue(':id_user', $id_user);
 				$requete->bindValue(':id_animaux', $idAnimal);
 				$requete->execute();
+				
 			}
 			else
 			{
+				$compteur = 0;
 				foreach ($idFav as $id)
 				{
-					if ($id == $idAnimal)
+					if ($id["id_animaux"] == $idAnimal)
 					{
-						++$_SESSION["existance"];
+						$compteur++;
 					}
 				}
-				if ($_SESSION["existance"] == 0 ) {
-					$requete1=$connexion->prepare("INSERT INTO favoris (id_user,id_animaux) 
+				if ($compteur ==0)
+				{
+					$stmt=$connexion->prepare("INSERT INTO favoris (id_user,id_animaux) 
 														VALUES (:id_user, :id_animaux)");
-					$requete1->bindValue(':id_user', $id_user);
-					$requete1->bindValue(':id_animaux', $idAnimal);
-					$requete1->execute();
+						$stmt->bindValue(':id_user', $id_user);
+						$stmt->bindValue(':id_animaux', $idAnimal);
+						$stmt->execute();
 				}
-			}	
+				
+			}
 		}
 
 		public static function retournerIDSFavoris()

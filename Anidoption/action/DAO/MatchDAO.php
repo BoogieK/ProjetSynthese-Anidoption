@@ -93,21 +93,6 @@
 		}
 
 
-		public static function trouverMatchPremierRound($espece, $sexe)
-        {
-            $connexion = Connexion::getConnexion();
-			
-			$sql = $connexion->prepare("SELECT id from animaux where espece=? AND sexe=?");
-			$sql->bindValue(1, $espece);
-			$sql->bindValue(2, $sexe);
-			$sql->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
-			$sql->execute();
-
-			$idCorrespondants = $sql->fetchAll();	//Si row n'est pas null (qu'il y a des lignes)
-            
-            return $idCorrespondants;
-		}
-
 
 		public static function selectionnerEntrainementProfilChien()
 		{
@@ -155,7 +140,7 @@
 				$sql2->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
 				$sql2->execute();
 
-				if ($row = $sql->fetch())	//Si row n'est pas null (qu'il y a des lignes)
+				if ($row = $sql2->fetch())	//Si row n'est pas null (qu'il y a des lignes)
 				{
 					$entrainementsNecessaires = $row["nom"];
 				}
@@ -241,8 +226,158 @@
 			}
 			return $nom;
 		}
+		
+		public static function retournerNomFavoris($idAnimal)
+		{
+			$connexion = Connexion::getConnexion();
+			
+			$sql = $connexion->prepare("SELECT nom from animaux where id=?");
+			$sql->bindValue(1, $idAnimal);
+			$sql->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
+			$sql->execute();
 
-		public static function retournerFicheChien($idAnimal)
+			if ($row = $sql->fetch())	//Si compteCorrespondant n'est pas null (qu'il y a des lignes)
+			{
+				$nomAnimal= $row["nom"];
+			}
+			return $nomAnimal;
+		}
+
+		########################################################################################################
+		#												CHATS
+		########################################################################################################
+
+		public static function selectionnerDonneesUserChat()
+		{
+			$connexion = Connexion::getConnexion();
+			$id_user = $_SESSION["id"];
+
+			$sql = $connexion->prepare("SELECT * from compteChat where id_user=?");
+			$sql->bindValue(1, $id_user);
+			$sql->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
+			$sql->execute();
+
+			if ($compteCorrespondant = $sql->fetch())	//Si compteCorrespondant n'est pas null (qu'il y a des lignes)
+			{
+				$dataFicheUser = [];
+				$dataFicheUser["sexe"] = $compteCorrespondant["sexe"];
+				$dataFicheUser["griffes"] = $compteCorrespondant["griffes"];
+				$dataFicheUser["toilettage"] = $compteCorrespondant["toilettage"];
+				$dataFicheUser["famille"] = $compteCorrespondant["famille"];
+            }
+            return $dataFicheUser;	
+		}
+
+		public static function selectionnerCaracteresProfilChat()
+		{
+			$connexion = Connexion::getConnexion();
+			$id_user = $_SESSION["id"];
+			
+			$sql = $connexion->prepare("SELECT id_compteChatCaractere from compteChat_caractere where id_user=?");
+			$sql->bindValue(1, $id_user);
+			$sql->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
+			$sql->execute();
+
+			$idCaracteres = $sql->fetchAll();
+
+			foreach ($idCaracteres as $idCaracteresSelectionnes)
+			{
+				$sql2 = $connexion->prepare("SELECT nom from caractereChat where id_caractere=?");
+				$sql2->bindValue(1, $idCaracteresSelectionnes);
+				$sql2->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
+				$sql2->execute();
+
+				if ($row = $sql2->fetch())	//Si row n'est pas null (qu'il y a des lignes)
+				{
+					$caracteresChoisis = $row["nom"];
+				}
+			}
+			return $caracteresChoisis;
+		}
+
+		public static function rechercheSexeChat()
+		{
+			$connexion = Connexion::getConnexion();
+			$id_user = $_SESSION["id"];
+			
+            $sql = $connexion->prepare("SELECT sexe from compteChat where id_user=?");
+			$sql->bindValue(1, $id_user);
+			$sql->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
+			$sql->execute();
+
+			if ($row = $sql->fetch())	//Si row n'est pas null (qu'il y a des lignes)
+			{
+				$sexe = $row["sexe"];
+            }
+			return $sexe;
+		}
+
+		public static function selectionnerDonneesBonnesFichesChat($idAnimaux)
+		{
+			$connexion = Connexion::getConnexion();
+			
+			$sql = $connexion->prepare("SELECT * from ficheChat where id_animaux=?");
+			$sql->bindValue(1, $idAnimaux);
+			$sql->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
+			$sql->execute();
+
+			if ($ficheCorrespondante = $sql->fetch())	//Si compteCorrespondant n'est pas null (qu'il y a des lignes)
+			{
+				$dataFiche = [];
+				$dataFiche["griffes"] = $ficheCorrespondante["griffes"];
+				$dataFiche["toilettage"] = $ficheCorrespondante["toilettage"];
+				$dataFiche["famille"] = $ficheCorrespondante["famille"];
+				
+			}
+			return $dataFiche;
+		}
+
+		public static function selectionnerCaracteresFicheChat($idAnimaux)
+		{	
+			$connexion = Connexion::getConnexion();
+			
+			$sql = $connexion->prepare("SELECT id_caractere from ficheChat_caractere where id_animaux=?");
+			$sql->bindValue(1, $idAnimaux);
+			$sql->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
+			$sql->execute();
+
+			$idCaracteres = $sql->fetchAll();
+
+			foreach ($idCaracteres as $idCaracteresPerso)
+			{
+				$sql2 = $connexion->prepare("SELECT nom from caractereChat where id_caractere=?");
+				$sql2->bindValue(1, $idCaracteresPerso);
+				$sql2->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
+				$sql2->execute();
+
+				if ($row = $sql2->fetch())	//Si row n'est pas null (qu'il y a des lignes)
+				{
+					$caracteresNecessaires = $row["nom"];
+				}
+			}
+			return $caracteresNecessaires;
+		}
+
+		########################################################################################################
+		#												COMMUNS
+		########################################################################################################
+
+		public static function trouverMatchPremierRound($espece, $sexe)
+        {
+            $connexion = Connexion::getConnexion();
+			
+			$sql = $connexion->prepare("SELECT id from animaux where espece=? AND sexe=?");
+			$sql->bindValue(1, $espece);
+			$sql->bindValue(2, $sexe);
+			$sql->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
+			$sql->execute();
+
+			$idCorrespondants = $sql->fetchAll();	//Si row n'est pas null (qu'il y a des lignes)
+            
+            return $idCorrespondants;
+		}
+
+		public static function retournerFicheAnimal($idAnimal)
 		{
 			$connexion = Connexion::getConnexion();
 			
@@ -260,21 +395,5 @@
 				$dataFiche["img"] = $ficheCorrespondante["img"];
 			}
 			return $dataFiche;
-		}
-		
-		public static function retournerNomFavoris($idAnimal)
-		{
-			$connexion = Connexion::getConnexion();
-			
-			$sql = $connexion->prepare("SELECT nom from animaux where id=?");
-			$sql->bindValue(1, $idAnimal);
-			$sql->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
-			$sql->execute();
-
-			if ($row = $sql->fetch())	//Si compteCorrespondant n'est pas null (qu'il y a des lignes)
-			{
-				$nomAnimal= $row["nom"];
-			}
-			return $nomAnimal;
 		}
     }

@@ -29,6 +29,7 @@
 			$this->afficherFavoris();
 			
 			
+			
 			if (isset($_POST["deconnexion"]))
 			{
 				session_unset();
@@ -46,6 +47,7 @@
 				{
 					$idAnimalPhp = $_POST["idAnimalPhp"];
 					$this->ajouterFavoris($idAnimalPhp);
+					
 				}
 
 				++$_SESSION['compteur'];
@@ -66,14 +68,64 @@
 			
 			if ($espece==1)
 			{
-				# code...
+				
+				$compteUser = MatchDAO::selectionnerDonneesUserChat();
+				
+				$caracteresDesires = MatchDAO::selectionnerCaracteresProfilChat();
+				
+				$sexe = MatchDAO::rechercheSexeChat();
+				
+				$conteneurIdPremierRound = MatchDAO::trouverMatchPremierRound($espece, $sexe);
+				
+				foreach($conteneurIdPremierRound as $idAnimaux)
+				{
+					$idChat = $idAnimaux["id"];
+
+					$ficheChat=MatchDAO::selectionnerDonneesBonnesFichesChat($idChat);
+					
+					if ($compteUser["griffes"] == $ficheChat["griffes"])
+					{
+						if ($compteUser["toilettage"]==$ficheChat["toilettage"])
+						{
+							if ($compteUser["famille"]==$ficheChat["famille"])
+							{
+								
+								$listeNomCarcacteresNecessaires = MatchDAO::selectionnerCaracteresFicheChat($idAnimaux);
+													
+								if ($listeNomCarcacteresNecessaires == $caracteresDesires)
+								{	//J'ai besoin de [] pour pouvoir .append les id dans mon tableau, car 
+									//cette fois-ci, je n'ai pas de fonction qui appel un fetch ou fetchAll MySQL.
+									$this->listeMatchPossibles[]=$idChat;
+								}
+								else
+								{
+									echo "caracteres non-corespondants";
+									echo $idChat;
+								}
+							}
+							else
+							{
+								echo "famille non-corespondant";
+								echo $idChat;
+							}
+						}
+						else
+						{
+							echo "toilettage non-corespondant";
+							echo $idChat;
+						}
+					}
+					else
+					{
+						echo "griffes non-corespondantes";
+						echo $idChat;
+					}
+				}
 			}
 			elseif ($espece==2)
 			{	
 				$compteUser = MatchDAO::selectionnerDonneesUserChien();
-				//echo $compteUser["taille"];
 				$entrainementDesirees = MatchDAO::selectionnerEntrainementProfilChien();
-				//Sexe deriser par l'utilisateur
 				$sexe = MatchDAO::rechercheSexeChien();
 
 				$conteneurIdPremierRound = MatchDAO::trouverMatchPremierRound($espece, $sexe);
@@ -169,7 +221,7 @@
 		{
 			//Aller chercher le id de l'animal a la position ou on est rendu dans le tableau
 			$idActuel = $this->listeMatchPossibles[$positionTableau];
-			$this->FichePresentee = MatchDAO::retournerFicheChien($idActuel);	
+			$this->FichePresentee = MatchDAO::retournerFicheAnimal($idActuel);	
 		}
 
 		public function ajouterFavoris($idAnimalAime)
@@ -188,6 +240,7 @@
 					$this->listeFavoris[]=MatchDAO::retournerNomFavoris($int);
 				}
 			}
+			
 		}
 
 		public function finFiches()
