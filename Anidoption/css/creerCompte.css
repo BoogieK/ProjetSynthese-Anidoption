@@ -114,10 +114,16 @@ main
     text-decoration: none;
     cursor: pointer;
 
-   float: right;
-   margin-right: 10%;
-    margin-top: 170%;
+    float: right;
+    margin-right: 40%;
+    margin-top: 190%;
     margin-bottom: 10%;
+}
+
+a
+{
+    text-decoration: none;
+    color: white;
 }
 
 .contenu
@@ -144,8 +150,8 @@ main
     text-decoration: none;
     cursor: pointer;
 
-    margin-left: 10%;
-    margin-top: 170%;
+    margin-left: 40%;
+    margin-top: 190%;
     float: left;
     margin-bottom: 10%;
 }
@@ -159,54 +165,55 @@ h2
     font-size: 250%;
 }
 
-form
+label
 {
-    margin-left: 3%;
+    font-size: 30pt;
+    margin-top: 50%;
 }
+
 #prenom
 {
-    float:right;
-    margin-top: 1%;
+    font-size:15pt;
 }
 
 #nom
 {
-    float:right;
-    margin-top: 1%;
+    font-size:15pt;
 }
 
 #adresseCourriel
 {
-    float:right;
-    margin-top: 1%;
+    font-size:15pt;
 }
 
 #motDePasse
 {
-    float:right;
-    margin-top: 1%;
+    font-size:15pt;
 } 
 
 #confirmationMotDePasse
 {
-    float:right;
-    margin-top: 1%;
-} 
-
-p
-{
-    text-align: center;
+    font-size:15pt;
 }
 
 #favoriChien
 {
+    font-size: 20pt;
     margin-left: 36%;
 }
 
 #favoriChat
 {
+    font-size: 20pt;
     margin-left: 5%;
 }
+
+p
+{
+    font-size: 30pt;
+    text-align: center;
+}
+
 footer
 {
     background-color: #69306d;

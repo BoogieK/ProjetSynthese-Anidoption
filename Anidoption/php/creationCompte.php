@@ -23,37 +23,37 @@
                 <h1>Anidoption</h1>
             </div>
             <div class="espacement"></div>
-            <div class="creationCompte">
-                    <button type="submit">Créer un compte</button>
-            </div>
+            <form action="index.php" method="post" class="creationCompte">
+			<button type="submit" name="creerCompte"> Créer un compte</button>
+		</form>
         </header>
 
 <main>
     <form action="creationCompte.php" method="POST" class="espaceGauche">
-        <button type="submit"><a href="accueil.php">Annuler</a></button>
+        <button type="submit"><a href="index.php">Annuler</a></button>
     </form>       
     <div class="contenu">
         <h2>- Compte -</h2>
         <form action="creationCompte.php" method="POST">
             <div>
                 <label for="prenom">Prenom: </label>
-                <input type="text" name="prenom" id="prenom" size="100"/>
+                <input type="text" name="prenom" id="prenom" size="30" style="height:25px;"/>
             </div>
             <div>
                 <label for="nom">Nom: </label>
-                <input type="text" name="nom" id="nom" size="100"/>
+                <input type="text" name="nom" id="nom" size="30" style="height:25px;"/>
             </div>
             <div>
                 <label for="courriel">Adresse courriel: </label>
-                <input type="text" name="adresseCourriel" id="adresseCourriel" size="100"/>
+                <input type="text" name="adresseCourriel" id="adresseCourriel" size="46" style="height:25px;"/>
             </div>
             <div>
                 <label for="motDePasse">Mot de passe: </label>
-                <input type="password" name="motDePasse" id="motDePasse" size="100"/>
+                <input type="password" name="motDePasse" id="motDePasse" size="51" style="height:25px;"/>
             </div>
             <div>
                 <label for="confirmationMotDePasse">Confirmation du passe: </label>
-                <input type="password" name="confirmationMotDePasse" id="confirmationMotDePasse" size="100"/>
+                <input type="password" name="confirmationMotDePasse" id="confirmationMotDePasse" size="40" style="height:25px;"/>
             </div>
         <br>
         <div>
