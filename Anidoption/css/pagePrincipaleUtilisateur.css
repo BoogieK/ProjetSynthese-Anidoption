@@ -169,8 +169,10 @@ main
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 560px;
-    height: 573px;
+    /* width: 560px;
+    height: 580px; */
+    width: 100%;
+    height: auto;
     
     border: 5px solid #69306d;
     border-radius: 3%;
@@ -216,7 +218,6 @@ h2
 
 .boutonsChoix
 {
-    margin-top: 15%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto;

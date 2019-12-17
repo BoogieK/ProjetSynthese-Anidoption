@@ -120,6 +120,128 @@
 			return $idFav;
 		}
 
+		########################################################################################################
+		#												ADMIN
+		########################################################################################################
+
+		// public static function retournerNomsChatsEnAdoption()
+		// {
+		// 	$connexion = Connexion::getConnexion();
+			
+		// 	$sql = $connexion->prepare("SELECT id from animaux where espece=?");
+		// 	$sql->bindValue(1, 1);
+		// 	$sql->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
+		// 	$sql->execute();
+
+		// 	$idChat = $sql->fetchAll();
+
+		// 	foreach ($idChat as $id)
+		// 	{
+		// 		$sql2 = $connexion->prepare("SELECT nom from animaux where id=?");
+		// 		$sql2->bindValue(1, $id);
+		// 		$sql2->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
+		// 		$sql2->execute();
+
+		// 		if ($row = $sql2->fetch())	//Si row n'est pas null (qu'il y a des lignes)
+		// 		{
+		// 			$entrainementsNecessaires = $row["nom"];
+		// 		}
+		// 	}
+		// 	return $entrainementsNecessaires;
+		// }
+
+		// public static function retournerIDChiensEnAdoption()
+		// {
+		// 	$connexion = Connexion::getConnexion();
+
+        //     $sql = $connexion->prepare("SELECT id from animaux where espece=?");
+		// 	$sql->bindValue(1, 2);
+		// 	$sql->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
+		// 	$sql->execute();
+
+		// 	$idChienAdop = $sql->fetchAll();
+			
+		// 	//var_dump($idChienAdop);
+		// 	return $idChienAdop;
+		
+		// }
+
+		// public static function retournerNomAdoption($idAnimal)
+		// {
+		// 	$connexion = Connexion::getConnexion();
+			
+		// 	$sql = $connexion->prepare("SELECT nom from animaux where id=?");
+		// 	$sql->bindValue(1, $idAnimal);
+		// 	$sql->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
+		// 	$sql->execute();
+
+		// 	if ($row = $sql->fetch())	//Si compteCorrespondant n'est pas null (qu'il y a des lignes)
+		// 	{
+		// 		$nomAnimal= $row["nom"];
+		// 	}
+		// 	return $nomAnimal;
+		// }
+		public static function retournerIDSAdopt()
+		{
+			$connexion = Connexion::getConnexion();
+			$espece = 2;
+
+            $sql = $connexion->prepare("SELECT id from animaux where espece=?");
+			$sql->bindValue(1, $espece);
+			$sql->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
+			$sql->execute();
+
+			$idFav = $sql->fetchAll();
+			
+			
+			return $idFav;
+		}
+		public static function retournerChiensEnAdoption()
+		{
+			$connexion = Connexion::getConnexion();
+			
+			$sql = $connexion->prepare("SELECT * from animaux where espece=?");
+			$sql->bindValue(1, 2);
+			$sql->execute();
+			
+			$row = $sql->fetchAll();
+			foreach ($row as $animal)
+			{
+				$fiche=[];
+				$fiche["nom"]=$animal["nom"];
+				$fiche["id"]=$animal["id"];
+			}
+			
+			return $fiche;
+		}
+
+		public static function retournerChatsEnAdoption()
+		{
+			$connexion = Connexion::getConnexion();
+
+			$sql = $connexion->prepare("SELECT * from animaux where espece=?");
+			$sql->bindValue(1, 1);
+			$sql->setFetchMode(PDO::FETCH_ASSOC);
+			$sql->execute();
+			
+			$row = $sql->fetchAll();	
+
+			return $row;
+		}
+
+		
+
+		public static function retournerAnimauxEnAdoption()
+		{
+			$connexion = Connexion::getConnexion();
+			
+			$sql = $connexion->prepare("SELECT * from animaux");
+			$sql->execute();
+
+			$adoption = $sql->fetchAll();
+			
+			return $adoption;
+		}
     }
 	
 

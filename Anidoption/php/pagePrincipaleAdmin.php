@@ -32,12 +32,45 @@
             <div class="fichesChiens">
                 <h2>Chiens</h2>
                 <div id="Chiens">
-
+                <!-- <form action="pagePrincipaleAdmin.php" method="post"> -->
+                <?php
+                        foreach($action->listeAdopt as $animal)
+                        {
+                            if ($animal[1]==2)
+                            {          
+                ?>
+                    <p><?= $animal[2] ?>
+                        <input type="hidden" name="idAdoption" value=<?= $animal[0] ?> >
+                        <button type="submit" name = "supprimer" >
+                            <img src="../images/poubelle.png"height="20" width="20">
+                        </button>
+                    </p>
+                <?php
+                        }
+                    }
+                ?>
+                <!-- </form> -->
                 </div>
             </div>
             <div class="fichesChats">
                 <h2>Chats</h2>
                 <div id="Chats">
+                <?php
+                        foreach($action->listeAdopt as $animal)
+                        {
+                            if ($animal[1]==1)
+                            {
+                    ?>
+                    <p><?= $animal[2] ?>
+                        <input type="hidden" name="idAdoption" value=<?= $animal[0] ?> >
+                        <button type="submit" name = "supprimer" >
+                            <img src="../images/poubelle.png"height="20" width="20">
+                        </button>
+                    </p>
+                    <?php
+                        }
+                    }
+                    ?>
 
                 </div>
             </div>

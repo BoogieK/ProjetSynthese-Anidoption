@@ -54,7 +54,9 @@
         <div class="contenu">
             <div class="ficheAnimal">
                 <div class="affichage">
+                
                     <img src="../upload/<?= $action->FichePresentee["img"]?>">
+                    
                     <div class="info">
                         <p class="nom"><?= $action->FichePresentee["nom"]?></p>
                         <p class="age"><?= $action->FichePresentee["age"]?> ans</p>
