@@ -25,7 +25,7 @@
         </div>
         <div class="espacement"></div>
         <form action="index.php" method="post" class="creationCompte">
-			<button type="submit" name="creerCompte">Créer un compte</button>
+			<button type="submit" name="creerCompte"> Créer un compte</button>
 		</form>
     </header>
     <main>
@@ -44,14 +44,14 @@
             <form action="index.php" method="POST">
                 <div>
                     <label for="courriel">Adresse courriel: </label>
-                    <input type="text" name="adresseCourriel" id="adresseCourriel" size="50" />
+                    <input type="text" name="adresseCourriel" id="adresseCourriel" size="60" style="height:25px;"/>
                 </div>
                 <div>
                     <label for="motDePasse">Mot de passe: </label>
-                    <input type="password" name="motDePasse" id="motDePasse" size="50" />
+                    <input type="password" name="motDePasse" id="motDePasse" size="60" style="height:25px;" />
                 </div>
                 <div>
-                    <button type="submit">Connexion</button>
+                    <button type="submit" class="connexion">Connexion</button>
                 </div>
             </form>
         </div>

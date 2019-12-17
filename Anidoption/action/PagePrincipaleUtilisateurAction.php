@@ -244,9 +244,21 @@
 		}
 
 		public function finFiches()
-		{
-			$this->FichePresentee["nom"] = "Aucun choix possibles";	
-			$this->FichePresentee["age"] = " - ";
-			$this->FichePresentee["img"] = "sad.gif";
+		{			
+			$espece = MatchDAO::rechercheEspece();	
+			
+			if ($espece==1)
+			{
+				$this->FichePresentee["nom"] = "Aucun choix possibles";	
+				$this->FichePresentee["age"] = " - ";
+				$this->FichePresentee["img"] = "oupsCat.gif";
+			}
+			elseif ($espece==2)
+			{
+				$this->FichePresentee["nom"] = "Aucun choix possibles";	
+				$this->FichePresentee["age"] = " - ";
+				$this->FichePresentee["img"] = "sad.gif";
+			}
+			
 		}
 	}

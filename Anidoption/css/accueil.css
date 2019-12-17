@@ -17,7 +17,7 @@ header
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
-
+    height: 160px;
     background-color: #69306d;
     border: 5px solid black;
 }
@@ -52,7 +52,7 @@ header
     margin-top: 5%;
     margin-left: 5%;
     margin-bottom: 1%;
-}
+} 
 
 .logo h1
 {
@@ -117,21 +117,46 @@ main
 h2
 {
     margin: 0%;
-    padding-top: 30%;
-    padding-bottom: 25%;
+    padding-top: 20%;
+    padding-bottom: 15%;
     text-align: center;
     font-size: 250%;
 }
 
-form
+label
 {
-    margin-left: 2%;
+    font-size: 30pt;
+    margin-top: 15%;
+}
+
+#adresseCourriel
+{
+    
+    font-size:15pt;
 }
 
 #motDePasse
 {
-    margin-left: 9%;
-} 
+    
+    font-size:15pt;
+}
+
+.connexion
+{
+    margin-top: 25%;
+    margin-left:34%;
+    margin-bottom: 10%;
+    
+    color: white;
+    font-family: fontAnidoption;
+    font-size: 150%;
+    background-color: #69306d;
+
+    padding: 2%;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
 
 form button
 {

@@ -4,22 +4,7 @@
 
 	class MatchDAO
 	{
-        public static function rechercheEspece()
-		{
-			$connexion = Connexion::getConnexion();
-			$id_user = $_SESSION["id"];
-			
-            $sql = $connexion->prepare("SELECT espece from utilisateurs where id=?");
-			$sql->bindValue(1, $id_user);
-			$sql->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
-			$sql->execute();
-
-			if ($row = $sql->fetch())	//Si row n'est pas null (qu'il y a des lignes)
-			{
-				$espece = $row["espece"];
-			}
-			return $espece;
-		}
+        
 		
 
 		public static function selectionnerDonneesUserChien()
@@ -196,36 +181,7 @@
 			return $age;
 		}
 
-		public static function ajouterUnFavoris($idAnimalChoisi)
-		{
-			$connexion = Connexion::getConnexion();
-			
-			$sql = $connexion->prepare("SELECT nom from animaux where id=?");
-			$sql->bindValue(1, $idAnimalChoisi);
-			$sql->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
-			$sql->execute();
-
-			if ($row = $sql->fetch())	//Si row n'est pas null (qu'il y a des lignes)
-			{
-				$nom = $row["nom"];
-				//echo $nom;
-				$id_user = $_SESSION["id"];
-				
-				try
-            	{
-                	$sql2=$connexion->prepare("INSERT INTO favoris (id_user,id_animaux) VALUES (:id_user, :id_animaux)");
-					$sql2->bindValue(':id_user', $id_user);
-					$sql2->bindValue(':id_animaux', $idAnimalChoisi);
-                	$sql2->execute();
-
-				} catch (PDOException $erreur)
-				{
-					echo "error";
-					echo $erreur->getMessage();
-				}	
-			}
-			return $nom;
-		}
+		
 		
 		public static function retournerNomFavoris($idAnimal)
 		{
@@ -362,6 +318,23 @@
 		#												COMMUNS
 		########################################################################################################
 
+		public static function rechercheEspece()
+		{
+			$connexion = Connexion::getConnexion();
+			$id_user = $_SESSION["id"];
+			
+            $sql = $connexion->prepare("SELECT espece from utilisateurs where id=?");
+			$sql->bindValue(1, $id_user);
+			$sql->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
+			$sql->execute();
+
+			if ($row = $sql->fetch())	//Si row n'est pas null (qu'il y a des lignes)
+			{
+				$espece = $row["espece"];
+			}
+			return $espece;
+		}
+
 		public static function trouverMatchPremierRound($espece, $sexe)
         {
             $connexion = Connexion::getConnexion();
@@ -390,10 +363,42 @@
 			{
 				$dataFiche = [];
 				$dataFiche["id"] = $ficheCorrespondante["id"];
+				$dataFiche["espece"] = $ficheCorrespondante["espece"];
 				$dataFiche["nom"] = $ficheCorrespondante["nom"];
 				$dataFiche["age"] = $ficheCorrespondante["age"];
 				$dataFiche["img"] = $ficheCorrespondante["img"];
 			}
 			return $dataFiche;
+		}
+
+		public static function ajouterUnFavoris($idAnimalChoisi)
+		{
+			$connexion = Connexion::getConnexion();
+			
+			$sql = $connexion->prepare("SELECT nom from animaux where id=?");
+			$sql->bindValue(1, $idAnimalChoisi);
+			$sql->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
+			$sql->execute();
+
+			if ($row = $sql->fetch())	//Si row n'est pas null (qu'il y a des lignes)
+			{
+				$nom = $row["nom"];
+				//echo $nom;
+				$id_user = $_SESSION["id"];
+				
+				try
+            	{
+                	$sql2=$connexion->prepare("INSERT INTO favoris (id_user,id_animaux) VALUES (:id_user, :id_animaux)");
+					$sql2->bindValue(':id_user', $id_user);
+					$sql2->bindValue(':id_animaux', $idAnimalChoisi);
+                	$sql2->execute();
+
+				} catch (PDOException $erreur)
+				{
+					echo "error";
+					echo $erreur->getMessage();
+				}	
+			}
+			return $nom;
 		}
     }

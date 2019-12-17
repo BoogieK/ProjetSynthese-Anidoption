@@ -17,7 +17,7 @@ header
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
-
+    height: 160px;
     background-color: #69306d;
     border: 5px solid black;
 }
