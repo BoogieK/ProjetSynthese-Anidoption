@@ -92,25 +92,17 @@ main
     color: #0e103d;
 
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(7, 1fr);
     grid-template-rows: auto;
 }
 
 .coteGauche
 {
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    grid-template-rows: auto;
-
     color: #0e103d;
-    
 }
 
 .favoris
 {
-    grid-column: 1;
-    grid-row: 1;
-
     background-color: white;
     border: 5px solid black;
 }
@@ -121,17 +113,23 @@ main
     
 }
 
+.animauxFavoris
+{
+    text-align: center;
+    font-size:35pt;
+}
+
 .parametres
 {
     margin-top: 500%;
-
     border-top: 5px solid black; 
-
 }
+
 .parametres h3
 {
     padding-left: 25%;
 }
+
 .parametres img
 {
     width: 20%;
@@ -145,29 +143,35 @@ main
 
 .contenu
 {
-    grid-column: 3 /span 2;
-    grid-row: 1; 
+    float: left;
+    width: 1100px;
+    height: 160px;
 }
 
 .ficheAnimal
 {
     background-color: white;
-    margin-top: 15%;
+    margin-top: 7%;
     margin-bottom: 15%;
+    margin-left: 32%;
 
-    padding-left: 10%;
-    padding-right: 10%;
-    padding-top: 10%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 5%;
     padding-bottom: 5%;
 
     border: 10px solid #69306d;
 }
 
+
 .affichage img
 {
-    width: 100%;
-    height: auto;
-
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 560px;
+    height: 573px;
+    
     border: 5px solid #69306d;
     border-radius: 3%;
 }
@@ -175,31 +179,29 @@ main
 .info
 {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
-
-    font-size: 175%;
     margin-bottom: 5%;
 }
 
 .nom
 {
-    grid-column: 1;
+    grid-column: 1 /span 2;
     grid-row: 1; 
     
-    margin-top: 1%;
+    margin-top: 5%;
     margin-bottom: 5%;
-    margin-left: 2%;
-
+    font-size:35pt;
     font-weight: bold;
 }
 
 .age
 {
-    grid-column: 2;
+    grid-column: 3;
     grid-row: 1; 
     
-    margin-top: 1%;
+    font-size:35pt;
+    margin-top: 5%;
     margin-bottom: 5%;
     text-align: right;
     margin-right: 2%;
@@ -212,36 +214,39 @@ h2
     font-size: 250%;
 }
 
-form button
-{
-    margin-top: 25%;
-    margin-left: 30.6%;
-    margin-bottom: 30%;
-    
-    color: white;
-    font-family: fontAnidoption;
-    font-size: 150%;
-    background-color: #69306d;
-
-    padding: 2%;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-}
-
 .boutonsChoix
 {
+    margin-top: 15%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto;
 }
 
+.boutonsChoix button
+{
+    float: right;
+    margin-right: 10%;
+    margin-top: 6%;
+    padding: 5%;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+  
+}
 .like
 {
     grid-column: 1;
     grid-row: 1;
     text-align: right; 
     margin-right: 25%;
+    border: none;
+}
+
+.like img
+{
+    max-width: 65%;
+    height: auto;
+    border: none;
 }
 
 .like input
@@ -260,7 +265,12 @@ form button
     text-align: left;
     margin-left: 25%;
 }
-
+.nope img
+{
+    max-width: 65%;
+    height: auto;
+    border: none;
+}
 .nope input
 {
     width: 50%;

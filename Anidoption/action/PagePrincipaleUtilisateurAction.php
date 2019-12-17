@@ -45,9 +45,15 @@
 			{
 				if (isset($_POST["like"]) )
 				{
-					$idAnimalPhp = $_POST["idAnimalPhp"];
-					$this->ajouterFavoris($idAnimalPhp);
-					
+					if ($_SESSION['compteur']>=sizeof($this->listeMatchPossibles))
+					{	//Quand il n'y a plus de choix adaptes, on le mentionne au user
+						$this->finFiches();
+					}
+					else
+					{
+						$idAnimalPhp = $_POST["idAnimalPhp"];
+						$this->ajouterFavoris($idAnimalPhp);
+					}
 				}
 
 				++$_SESSION['compteur'];

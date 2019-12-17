@@ -38,7 +38,7 @@
                         {
                     ?>
                     <div>
-                    <p><?= $nom ?></p>
+                    <p ><?= $nom ?></p>
                     </div> 
                     <?php
                         }
@@ -54,7 +54,7 @@
         <div class="contenu">
             <div class="ficheAnimal">
                 <div class="affichage">
-                    <img src="../upload/<?= $action->FichePresentee["img"]?>" width="573" height="573">
+                    <img src="../upload/<?= $action->FichePresentee["img"]?>">
                     <div class="info">
                         <p class="nom"><?= $action->FichePresentee["nom"]?></p>
                         <p class="age"><?= $action->FichePresentee["age"]?> ans</p>
@@ -70,7 +70,7 @@
                         </div>
                         <div class="nope">
                             <button name="nope" type="submit">
-                                <img id="nope" src="../images/refusButton.png" />
+                                <img name="nope" type="submit" id="nope" src="../images/refusButton.png" />
                                 <input type="hidden" name="compteur" value="<?php echo $_SESSION['compteur']; ?>" />
                             </button>
                         </div>
