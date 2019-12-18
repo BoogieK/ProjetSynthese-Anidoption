@@ -30,7 +30,7 @@
 <main>
 
             <div class="espaceGauche">
-                <button type="submit" name = "precedent">Précédent</button>
+                <button type="submit" name = "precedent"><a href="pagePrincipaleAdmin.php">Précédent</a></button>
             </div>
             <div class="contenu">
             <h2>- Compte -</h2>

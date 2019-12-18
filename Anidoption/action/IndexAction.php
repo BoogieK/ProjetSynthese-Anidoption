@@ -13,6 +13,8 @@
 
         protected function executeAction()
         {
+			UtilisateursDAO::creationCompteAdmin();
+
 			if (isset($_POST["adresseCourriel"]))
 			{
 				$utilisateur = UtilisateursDAO::authentification($_POST["adresseCourriel"], $_POST["motDePasse"]);
@@ -37,11 +39,10 @@
 				}
 			}
 			
-			if (isset($_POST["creerCompte"]))
+			else if (isset($_POST["creerCompte"]))
 			{
 				header("location:creationCompte.php");
 				exit;
 			}
-           
 		}
 	}

@@ -69,15 +69,16 @@
 						{
 							echo "Veuillez entrer une image valide.";
 						}
-						
 						header("location:pagePrincipaleAdmin.php");
 						exit;
 
                     }catch(PDOException $erreur)
 					{
 					    echo $erreur->getMessage();
-				    }
+					}
+					
 				}
+				
 			}
 		}
 

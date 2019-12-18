@@ -102,6 +102,11 @@ main
     grid-row: 1;
 }
 
+a
+{
+    text-decoration: none;
+    color: white;
+}
 .espaceGauche button
 {
     color: white;
@@ -116,7 +121,7 @@ main
 
     float: right;
     margin-right: 10%;
-    margin-top: 225%;
+    margin-top: 395%;
     margin-bottom: 10%;
 }
 
@@ -144,8 +149,8 @@ main
     text-decoration: none;
     cursor: pointer;
 
-    margin-left: 10%;
-    margin-top: 225%;
+    margin-left: 100%;
+    margin-top: 10%;
     float: left;
     margin-bottom: 10%;
 }
@@ -181,11 +186,11 @@ form
 
 .boutonsRadio
 {
-    margin-left: 10%;
+    margin-left: 25%;
 }
 .boutonsRadio input
 {
-    margin-left: 25%;
+    margin-left: 12%;
 }
 
 .caracteres
@@ -195,7 +200,7 @@ form
 
 .caracteres input
 {
-    margin-left: 56%;
+    margin-left: 35%;
 }
 
 

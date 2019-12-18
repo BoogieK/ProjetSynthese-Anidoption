@@ -89,7 +89,7 @@
 
 					$ficheChat=MatchDAO::selectionnerDonneesBonnesFichesChat($idChat);
 					
-					if ($compteUser["griffes"] == $ficheChat["griffes"])
+					if ($compteUser["griffes"] == $ficheChat["griffes"] || $compteUser["griffes"]==4 )
 					{
 						if ($compteUser["toilettage"]==$ficheChat["toilettage"])
 						{

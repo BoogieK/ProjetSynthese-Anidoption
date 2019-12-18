@@ -6,11 +6,8 @@
 		public static function authentification($adresseCourriel, $motDePasse)
 		{
 			$utilisateur = null;
-			$adminEmail = "administration@spca.ca";
 
 			$connexion = Connexion::getConnexion();
-
-			UtilisateursDAO::creationCompteAdmin($adminEmail, $connexion);
 
 			if (isset($_POST["adresseCourriel"]) && isset($_POST["motDePasse"]))
 			{
@@ -34,10 +31,14 @@
 		}
 
 
-		public static function creationCompteAdmin($email, $connexion)
+		public static function creationCompteAdmin()
 		{
+			$connexion = Connexion::getConnexion();
+
+			$adminEmail = "administration@spca.ca";
+
 			$checkAdmin = $connexion->prepare("SELECT * from utilisateurs where adresseCourriel =:email");
-			$checkAdmin->bindValue(":email", $email);
+			$checkAdmin->bindValue(":email", $adminEmail);
 			$checkAdmin->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
 			$checkAdmin->execute();
 
@@ -50,12 +51,13 @@
 				{
 					$sql=$connexion->prepare("INSERT INTO utilisateurs (visibility,adresseCourriel,motDePasse) VALUES (:visibility, :email, :pwd)");
 					$sql->bindValue(':visibility', $visibility);
-					$sql->bindValue(':email', $email);
+					$sql->bindValue(':email', $adminEmail);
 					$sql->bindValue(':pwd', $motDePasse);
 					$sql->execute();
 
 				} catch (PDOException $erreur)
 				{
+					echo "icitte";
 					echo $erreur->getMessage();
 				}
 			}
