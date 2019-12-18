@@ -15,84 +15,82 @@
 </head>
 
 <body>
-<form action="pagePrincipaleAdmin.php" method="POST">
     <header>
         <div class="logo">
             <img src="../images/logo.png" alt="logo">
             <h1>Anidoption</h1>
         </div>
         <div class="espacement"></div>
-        <div class="deconnexion">
-          
-            <button type="submit" name="deconnexion">Déconnexion</button>
-        </div>
+        <form action="pagePrincipaleAdmin.php" method="POST">
+            <div class="deconnexion">
+                <button type="submit" name="deconnexion">Déconnexion</button>
+            </div>
+        </form>
     </header>
+
     <main>
         <div class="espaceGauche">
             <div class="fichesChiens">
                 <h2>Chiens</h2>
-                <div id="Chiens">
-                <!-- <form action="pagePrincipaleAdmin.php" method="post"> -->
                 <?php
-                        foreach($action->listeAdopt as $animal)
-                        {
-                            if ($animal[1]==2)
-                            {          
+                    foreach($action->listeAdopt as $animal)
+                    {
+                        if ($animal[1]==2)
+                        {          
                 ?>
-                    <p><?= $animal[2] ?>
-                        <input type="hidden" name="idAdoption" value=<?= $animal[0] ?> >
-                        <button type="submit" name = "supprimer" >
-                            <img src="../images/poubelle.png"height="20" width="20">
-                        </button>
-                    </p>
+                <form action="pagePrincipaleAdmin.php" method="POST">
+                    <div id="Chiens">
+                        <p><?=$animal[2]?>
+                            <input type="hidden" name="idAnimal" value=<?= $animal[0] ?> >
+                            <button type="submit" name="adoption">
+                                <img src="../images/poubelle.png" height="25" width="25">
+                            </button>
+                        </p> 
+                    </div>
+                </form>
                 <?php
                         }
                     }
-                ?>
-                <!-- </form> -->
-                </div>
+                ?>  
             </div>
             <div class="fichesChats">
                 <h2>Chats</h2>
-                <div id="Chats">
                 <?php
-                        foreach($action->listeAdopt as $animal)
-                        {
-                            if ($animal[1]==1)
-                            {
-                    ?>
-                    <p><?= $animal[2] ?>
-                        <input type="hidden" name="idAdoption" value=<?= $animal[0] ?> >
-                        <button type="submit" name = "supprimer" >
-                            <img src="../images/poubelle.png"height="20" width="20">
-                        </button>
-                    </p>
-                    <?php
+                    foreach($action->listeAdopt as $animal)
+                    {
+                        if ($animal[1]==1)
+                        {          
+                ?>
+                <form action="pagePrincipaleAdmin.php" method="POST">
+                    <div id="Chats">
+                        <p><?=$animal[2]?>
+                            <input type="hidden" name="idAnimal" value=<?= $animal[0] ?> >
+                            <button type="submit" name="adoption">
+                                <img src="../images/poubelle.png" height="25" width="25">
+                            </button>
+                        </p>   
+                    </div>
+                </form> 
+                <?php
                         }
                     }
-                    ?>
-
-                </div>
+                ?>
             </div>
         </div>
-
-        <div class="contenu">
+        <form action="pagePrincipaleAdmin.php" method="POST" class="contenu">
+            <h1>Creation de profil</h1>
+            <div>
+                <p>Quelle espèce voulez-vous mettre en adoption?</p> 
             
-                <h1>Creation de profil</h1>
-                <div>
-                    <p>Quelle espèce voulez-vous mettre en adoption?</p> 
-                
-                    <p>Chien<input type="radio" name="animalFavori" id="favoriChien" value="chien"/></p>
+                <p>Chien<input type="radio" name="animalFavori" id="favoriChien" value="chien"/></p>
                     
-                    <p>Chat<input type="radio" name="animalFavori" id="favoriChat" value="chat"/></p>
-                </div>
-          
-        </div>
-        <div class="espaceDroit">
-            <button type="submit" name="suivant">Suivant</button>
-        </div>
+                <p>Chat<input type="radio" name="animalFavori" id="favoriChat" value="chat"/></p>
+            </div>
+            <div class="espaceDroit">
+                <button type="submit" name="suivant" >Suivant</button>
+            </div>
+        </form>
     </main>
-    </form>
 <?php
     require_once("../partial/footer.php");
 ?>

@@ -3,6 +3,23 @@
 
 	class AnimauxDAO
 	{
+        public static function rechercheEspece($idAnimal)
+		{
+			$connexion = Connexion::getConnexion();
+			
+			
+            $sql = $connexion->prepare("SELECT espece from animaux where id=?");
+			$sql->bindValue(1, $idAnimal);
+			$sql->setFetchMode(PDO::FETCH_ASSOC); 	//Permet d'aller chercher par le nom de la colonne
+			$sql->execute();
+
+			if ($row = $sql->fetch())	//Si row n'est pas null (qu'il y a des lignes)
+			{
+				$espece = $row["espece"];
+			}
+			return $espece;
+        }
+        
 		public static function creationFicheAnimal($nom,$age,$sexe,$image, $espece)
 		{
             $id=null;
@@ -107,6 +124,70 @@
 			$requete->bindValue(':id_chien', $id);
 			$requete->bindValue(':id_ficheChienTraining', $idEntrainement);
 			$requete->execute();
+        }
+
+        public static function supprimerAnimalAdopte($idAnimalAdopte)
+        {
+            $connexion = Connexion::getConnexion();
+            
+            $espece=AnimauxDAO::rechercheEspece($idAnimalAdopte);
+            if ($espece == 1)
+            {
+                try
+			    {
+                    $sql = $connexion->prepare("DELETE FROM ficheChat_caractere WHERE id_animaux=:id");
+				    $sql->bindValue(":id", $idAnimalAdopte);
+                    $sql->execute();
+                    
+                    try
+                    {
+                        $stmt = $connexion->prepare("DELETE FROM ficheChat WHERE id_animaux=:id");
+				        $stmt->bindValue(":id", $idAnimalAdopte);
+                        $stmt->execute();
+                        
+                    } catch (PDOException $erreur)
+                    {
+                        echo $erreur->getMessage();
+                    }
+                }catch (PDOException $erreur)
+			    {
+			        echo $erreur->getMessage();
+                }
+            }
+            else
+            {
+                try
+			    {
+                    $sql = $connexion->prepare("DELETE FROM ficheChien_entrainement WHERE id_animaux=:id");
+				    $sql->bindValue(":id", $idAnimalAdopte);
+                    $sql->execute();
+                    
+                    try
+                    {
+                        $stmt = $connexion->prepare("DELETE FROM ficheChien WHERE id_animaux=:id");
+				        $stmt->bindValue(":id", $idAnimalAdopte);
+                        $stmt->execute();
+                        
+                    } catch (PDOException $erreur)
+                    {
+                        echo $erreur->getMessage();
+                    }
+                }catch (PDOException $erreur)
+			    {
+			        echo $erreur->getMessage();
+                }
+            }    
+            
+            try
+			{
+                $sql = $connexion->prepare("DELETE FROM animaux WHERE id=:id");
+			    $sql->bindValue(":id", $idAnimalAdopte);
+			    $sql->execute();
+
+		    }catch (PDOException $erreur)
+		    {
+                echo $erreur->getMessage();
+    	    }
         }
     }
 

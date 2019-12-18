@@ -3,6 +3,7 @@
 	require_once("DAO/UtilisateursDAO.php");
 	require_once("DAO/ComplementsDAO.php");
 	require_once("DAO/MatchDAO.php");
+	require_once("DAO/AnimauxDAO.php");
 	
 	class PagePrincipaleAdminAction extends CommonAction
 	{
@@ -20,7 +21,6 @@
         {
 
 			$this->listeAdopt=ComplementsDAO::retournerAnimauxEnAdoption();
-			//$this->afficherFavoris();
 
 			if (isset($_POST["deconnexion"]))
 			{
@@ -46,29 +46,17 @@
 				    exit;
                 }
 			}
-			// elseif (isset($_POST["supprimer"]))
-			// {
-			// 	//$idChien = $_POST["idAdoption"];
-			// 	//echo $idChien;
-			// }
-			
-		}
-
-		public function afficherFavoris()
-		{
-			$idFav = ComplementsDAO::retournerIDSAdopt();
-		
-			foreach ($idFav as $id)
+			elseif(isset($_POST["adoption"]))
 			{
-				foreach ($id as $int)
-				{
-					
-					$this->listeAdopt[]=ComplementsDAO::retournerNomAdopt($int);
-					var_dump($listeAdopt);
-				}
+				$idAnimal = $_POST["idAnimal"];
+				AnimauxDAO::supprimerAnimalAdopte($idAnimal);
+				header("location:PagePrincipaleAdmin.php");
+				exit;
 			}
 			
 		}
+
+		
 	}
 
            
